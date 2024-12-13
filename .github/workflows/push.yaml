@@ -23,10 +23,10 @@ jobs:
       
       - name: Iniciar sesión en GitHub Packages
         uses: docker/login-action@v2
-          with:
-            registry: ${{ env.REGISTRY }}
-            username: ${{ github.actor }}
-            password: ${{ secrets.WRITE_PACKAGES }}
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.WRITE_PACKAGES }}
       
       - name: Configurar variable de entorno de nombre del repositorio
         run: echo "REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
