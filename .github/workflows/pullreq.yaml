@@ -23,5 +23,8 @@ jobs:
       - name: Instalar dependencias
         run: npm i
       
-      - name: Testear Angular
+      - name: Instalar Angular CLI
+        run: npm i -g @angular/cli
+
+      - name: Testear Angular CLI
         run: ng test --watch=false --browsers=ChromeHeadless --code-coverage
