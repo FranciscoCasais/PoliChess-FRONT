@@ -8,8 +8,10 @@ on:
       - dev
 
 env:
+  BRANCH_NAME: ${{ github.ref_name }}
   IMAGE_NAME: polichess-front
   REGISTRY: ghcr.io
+  WRITE_PACKAGES: ${{ secrets.WRITE_PACKAGES }}
 
 jobs:
   cd:
@@ -26,7 +28,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.WRITE_PACKAGES }}
+          password: ${{ env.WRITE_PACKAGES }}
       
       - name: Configurar variable de entorno de nombre del repositorio
         run: echo "REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
@@ -36,4 +38,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+          tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH_NAME }}
