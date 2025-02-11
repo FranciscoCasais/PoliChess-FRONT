@@ -17,14 +17,15 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
 export class AppComponent {
 
-  public navbarAchicado: boolean = false;
+  title = 'PoliChess';
+
   public cursorEncimaCerrar: boolean = false;
   public cursorEncimaLogin: boolean = false;
   public cursorEncimaTresLineas: boolean = false;
+  public navbarAchicado: boolean = false;
   public registro: boolean = false;
-  public title = 'PoliChess';
-  public ventanaLoginRegistro: boolean = false;
   public tresLineas: boolean = false;
+  public ventanaLoginRegistro: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.navbarAchicado = false;
