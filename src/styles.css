@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --amarillo-poli: #FFCB00; 
+  --azul-poli: #155A9E;
+  --azul-poli-hover: #114a83;
+  --fuente-titulos: "LM Roman Caps 10";
+  --fuente-titulos-2: Arial;
+  --fuente-subtitulos: "Roboto Slab";
+  --fuente-texto: "Roboto Slab";
+  --fuente-botones: "Helvetica Neue";
+}
+
+@font-face {
+  font-family: "LM Roman Caps 10";
+  src: url("../public/fonts/lmromancaps10-regular.otf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+  scroll-padding-top: 125px;
+}
+
+body {
+  background-image: url("../public/fondo.png");
+  background-repeat: repeat;
+}
+
+.recuadro-blanco {
+  background-color: #f9f9f9;
+  border-radius: 7.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 1000px;
+  margin-bottom: 5%;
+  margin-top: 10%;
+}

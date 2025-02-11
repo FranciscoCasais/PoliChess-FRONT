@@ -1,0 +1,100 @@
+main {
+  height: calc(100vh - 104px);
+}
+
+#contenedor-bienvenida {
+  align-items: center;
+  display: flex;
+  margin-top: 104px;
+  height: calc(80vh - 104px);
+}
+
+#logo {
+  margin-left: 12.5%;
+  margin-right: 12.5%;
+  width: 25%;
+}
+
+#texto-bienvenida {
+  margin-right: 10%;
+  width: 50%;
+}
+
+#texto-bienvenida h1 {
+  font-family: var(--fuente-titulos);
+  font-size: 500%;
+}
+
+#texto-bienvenida h2 {
+  font-family: var(--fuente-subtitulos);
+  font-size: 250%;
+  font-weight: normal;
+}
+
+#contenedor-ver-mas {
+  align-items: center;
+  display: flex;
+  height: 10%;
+  justify-content: center;
+  margin-bottom: 10%;
+}
+
+#ver-mas {
+  background-color: var(--azul-poli);
+  border-radius: 7.5px;
+  box-shadow: 0 10px 40px 0 black;
+  color: white;
+  font-size: 125%;
+  font-family: var(--fuente-botones);
+  font-weight: bolder;
+  padding: 20px;
+}
+
+#ver-mas:hover {
+  background-color: var(--azul-poli-hover);
+  color: var(--amarillo-poli);
+  cursor: pointer;
+}
+
+@media (max-height: 650px) {
+  main {
+    height: 520px;
+  }
+
+  #contenedor-bienvenida {
+    height: 80%;
+  }
+
+  #contenedor-ver-mas {
+    height: 10%;
+  }
+}
+
+@media (max-width: 1049px) {
+  #texto-bienvenida h1 {
+    font-size: 400%;
+  }
+
+  #texto-bienvenida h2 {
+    font-size: 200%;
+  }
+}
+
+@media (max-width: 849px) {
+  #contenedor-bienvenida {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #logo {
+    margin: 0;
+    height: 200px;
+    width: auto;
+  }
+
+  #texto-bienvenida {
+    margin-left: 10%;
+    text-align: center;
+    width: 80%;
+  }
+}
