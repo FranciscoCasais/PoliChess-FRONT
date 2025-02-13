@@ -1,0 +1,3 @@
+revisar atributos modelo y servicio jugador (ver el tema del array de jugadores)
+pasar modelos del back al front con chatgpt
+crear servicios para cada modelo?

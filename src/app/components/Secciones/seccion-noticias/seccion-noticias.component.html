@@ -18,12 +18,7 @@
           <div 
             *ngFor="let noticia of noticiasFiltradas | slice:(paginaActual-1)*noticiasPorPagina:paginaActual*noticiasPorPagina" 
             class="noticia-card" 
-            [ngClass]="{
-              'grande': noticia.importancia === 5, 
-              'mediana': noticia.importancia === 4,
-              'pequena': noticia.importancia === 3,
-              'muy-pequena': noticia.importancia <= 2
-            }">
+            >
             <!-- Redirección a la página de la noticia -->
             <a [routerLink]="['/noticia', noticia.id]" class="noticia-link">
               <div class="noticia-info">

@@ -67,7 +67,7 @@ export class SeccionCalendarioComponent implements OnInit {
     const torneosAgrupados: { [key: number]: Torneo[] } = {};
 
     torneos.forEach(torneo => {
-      const fecha = new Date(torneo.fecha);
+      const fecha = new Date(torneo.fechaInicio);
       if (fecha.getMonth() === this.mesActual && fecha.getFullYear() === this.anioActual) {
         const dia = fecha.getDate();
         if (!torneosAgrupados[dia]) torneosAgrupados[dia] = [];
