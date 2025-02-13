@@ -1,0 +1,54 @@
+<section id="inicio-noticias">
+    <main id="contenedor-noticias">
+      <section id="noticias">
+  
+        <!-- Buscador por título -->
+        <div class="buscador">
+          <label for="buscarNoticia">Buscar Noticia:</label>
+          <input 
+            type="text" 
+            id="buscarNoticia" 
+            [(ngModel)]="busquedaTitulo" 
+            (input)="filtrarNoticias()" 
+            placeholder="Título de la noticia...">
+        </div>
+  
+        <!-- Contenedor de noticias con tamaño dinámico -->
+        <div class="noticias-grid">
+          <div 
+            *ngFor="let noticia of noticiasFiltradas | slice:(paginaActual-1)*noticiasPorPagina:paginaActual*noticiasPorPagina" 
+            class="noticia-card" 
+            [ngClass]="{
+              'grande': noticia.importancia === 5, 
+              'mediana': noticia.importancia === 4,
+              'pequena': noticia.importancia === 3,
+              'muy-pequena': noticia.importancia <= 2
+            }">
+            <!-- Redirección a la página de la noticia -->
+            <a [routerLink]="['/noticia', noticia.id]" class="noticia-link">
+              <div class="noticia-info">
+                <img 
+                  [src]="noticia.imagen" 
+                  alt="Imagen de {{ noticia.titulo }}" 
+                  class="noticia-imagen">
+                <div class="noticia-detalles">
+                  <h3>{{ noticia.titulo }}</h3>
+                  <p>{{ noticia.copete }}</p>
+                  <span class="noticia-fecha">Publicado el: {{ noticia.fecha | date: 'dd/MM/yyyy' }}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+  
+        <!-- Paginación -->
+        <div class="paginacion">
+          <button (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+          <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+          <button (click)="irPaginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+        </div>
+  
+      </section>
+    </main>
+  </section>
+  

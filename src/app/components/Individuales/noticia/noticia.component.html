@@ -1,0 +1,12 @@
+<div class ="todo">
+    <div class="noticia-container">
+      <h1 class="noticia-titulo">{{ noticia?.titulo }}</h1>
+      <img [src]="noticia?.imagen" alt="{{ noticia?.titulo }}" class="noticia-imagen">
+      <div class="noticia-detalles">
+        <span class="noticia-autor">Por: {{ noticia?.autor }}</span>
+        <span class="noticia-fecha">{{ noticia?.fecha | date:'fullDate' }}</span>
+      </div>
+      <p class="noticia-copete">{{ noticia?.copete }}</p>
+      <div class="noticia-cuerpo">{{ noticia?.cuerpo }}</div>
+    </div>
+    </div>

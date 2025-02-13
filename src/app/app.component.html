@@ -10,9 +10,9 @@
       <div id="contenedor-secciones-desplegable" *ngIf="tresLineas" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
         <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
         <a (click)="toggleTresLineas()" [routerLink]="['noticias']">NOTICIAS</a>
-        <a (click)="toggleTresLineas()" [routerLink]="['']">RANKING</a>
-        <a (click)="toggleTresLineas()" [routerLink]="['']">TORNEOS</a>
-        <a (click)="toggleTresLineas()" [routerLink]="['']">CALENDARIO</a>
+        <a (click)="toggleTresLineas()" [routerLink]="['jugadores']">RANKING</a>
+        <a (click)="toggleTresLineas()" [routerLink]="['torneos']">TORNEOS</a>
+        <a (click)="toggleTresLineas()" [routerLink]="['calendario']">CALENDARIO</a>
       </div>
     </div>
 
@@ -25,9 +25,9 @@
     <div id="contenedor-secciones">
       <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
       <a [routerLink]="['noticias']">NOTICIAS</a>
-      <a [routerLink]="['']">RANKING</a>
-      <a [routerLink]="['']">TORNEOS</a>
-      <a [routerLink]="['']">CALENDARIO</a>
+      <a [routerLink]="['jugadores']">RANKING</a>
+      <a [routerLink]="['torneos']">TORNEOS</a>
+      <a [routerLink]="['calendario']">CALENDARIO</a>
     </div>
 
     <div id="contenedor-login">

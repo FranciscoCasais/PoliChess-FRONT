@@ -1,0 +1,16 @@
+<div *ngIf="jugador" class="jugador-container">
+    <div class="jugador-card">
+      <h2> {{ jugador.nombre }} {{ jugador.apellido }}</h2>
+      <img [src]="jugador.foto" alt="Foto de {{ jugador.nombre }}" class="jugador-imagen">
+      
+      <div class="jugador-info">
+       
+        <h4>Edad: {{ calcularEdad(jugador.fechaDeNacimiento) }}</h4>
+        <h4>Elo Standard: {{ jugador.eloStandard }}</h4>
+        <h4>Elo Rapido: {{ jugador.eloRapido }}</h4>
+        <h4>Elo Blitz: {{ jugador.eloBlitz }}</h4>
+      </div>
+    
+    </div>
+  </div>
+  

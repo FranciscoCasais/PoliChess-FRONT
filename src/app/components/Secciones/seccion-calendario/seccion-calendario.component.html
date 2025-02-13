@@ -1,0 +1,46 @@
+<section id="inicio-calendario">
+    <div class="calendario-container">
+      <!-- Encabezado del calendario -->
+      <div class="calendario-header">
+        <button (click)="cambiarMes(-1)">&#8592;</button>
+        <h2>{{ meses[mesActual] }} {{ anioActual }}</h2>
+        <button (click)="cambiarMes(1)">&#8594;</button>
+      </div>
+  
+      <!-- Selección de año -->
+      <div class="anio-selector">
+        <label for="anioSelect">Seleccionar año:</label>
+        <select id="anioSelect" (change)="cambiarAnio($event)">
+          <option *ngFor="let anio of rangoAnios" [value]="anio" [selected]="anio === anioActual">
+            {{ anio }}
+          </option>
+        </select>
+      </div>
+  
+      <!-- Días de la semana -->
+      <div class="calendario-grid">
+        <div class="calendario-dia-header" *ngFor="let dia of diasSemana">
+          {{ dia }}
+        </div>
+  
+        <!-- Celdas vacías al inicio -->
+        <div class="calendario-dia empty" *ngFor="let _ of celdasVacias"></div>
+  
+        <!-- Días del mes -->
+        <div class="calendario-dia" *ngFor="let dia of diasDelMes">
+          <div class="dia-numero">{{ dia }}</div>
+          <!-- Mostrar torneos -->
+          <div *ngIf="torneosPorDia[dia]">
+            <div class="torneo-item" *ngFor="let torneo of torneosPorDia[dia]">
+              <!-- Envolver toda la tarjeta en el enlace -->
+              <a [routerLink]="['/torneo', torneo.id]" class="torneo-link">
+                <strong>{{ torneo.nombre }}</strong><br>
+                <span>{{ torneo.ritmo }} - {{ torneo.hora }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

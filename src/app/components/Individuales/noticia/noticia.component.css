@@ -1,0 +1,75 @@
+.todo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    margin-top: 1%;
+}
+.noticia-container {
+    max-width: 800px;
+    margin: 5rem auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .noticia-titulo {
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .noticia-imagen {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .noticia-detalles {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+  }
+  
+  .noticia-copete {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: #444;
+  }
+  
+  .noticia-cuerpo {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #222;
+    text-align: justify;
+  }
+  
+  .noticia-autor {
+    font-weight: bold;
+  }
+  
+  .noticia-fecha {
+    color: #777;
+  }
+  
+  .noticia-importancia {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #d9534f;
+    text-align: right;
+  }
+  

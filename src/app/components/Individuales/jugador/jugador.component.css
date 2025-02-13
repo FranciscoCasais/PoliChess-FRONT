@@ -1,0 +1,65 @@
+/* Contenedor principal */
+.jugador-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    margin-top: 1%;
+  }
+  
+  /* Tarjeta de perfil */
+  .jugador-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Estilo de la imagen */
+  .jugador-imagen {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para los títulos */
+  h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  h3, h4 {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 8px 0;
+  }
+  
+  /* Estilos del contenedor de información */
+  .jugador-info {
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 8px;
+  }
+  
+  /* Asegurarse de que las imágenes y textos no se desborden */
+  .jugador-card img,
+  .jugador-card h3,
+  .jugador-card h4 {
+    overflow-wrap: break-word;
+  }
+  
+  /* Botón (si decides agregar uno más tarde) */
+
+  
+  .jugador-button:hover {
+    background-color: #45a049;
+  }
+  

@@ -1,0 +1,104 @@
+#inicio-calendario {
+    padding: 15vh 10vw;
+    background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+    min-height: 100vh;
+  }
+  
+  .calendario-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .calendario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo del selector de años */
+  .anio-selector {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .anio-selector label {
+    font-size: 1.2rem;
+  
+    margin-right: 10px;
+  }
+  
+  .anio-selector select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .anio-selector select:focus {
+    outline: none;
+    
+  }
+  
+  
+  .calendario-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+  
+  .calendario-dia-header {
+    font-weight: bold;
+    background-color: #f2f2f2;
+    padding: 10px 0;
+  }
+  
+  .calendario-dia {
+    border: 1px solid #ddd;
+    min-height: 100px;
+    text-align: left;
+    position: relative;
+    padding: 5px;
+    background-color: #fff;
+  }
+  
+  .calendario-dia.empty {
+    border: none;
+    background-color: transparent;
+  }
+  
+  .dia-numero {
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  .torneo-item {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    margin: 2px 0;
+    padding: 3px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+  
+  /* Quitar el estilo de hipervínculo en los enlaces dentro de la tarjeta */
+  .torneo-item a {
+    text-decoration: none;  /* Quitar el subrayado */
+    color: inherit;         /* Mantener el color de texto por defecto */
+    display: block;         /* Hacer que el enlace ocupe toda la tarjeta */
+    height: 100%;           /* Asegurarse de que el enlace cubra toda la tarjeta */
+  }
+  
+  .torneo-link {
+    width: 100%;   /* Ocupa todo el ancho de la tarjeta */
+    height: 100%;  /* Ocupa todo el alto de la tarjeta */
+  }
+  
+  
+  
+  
+  
