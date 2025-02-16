@@ -1,12 +1,14 @@
 main {
   height: calc(100vh - 104px);
 }
-
 #contenedor-bienvenida {
   align-items: center;
   display: flex;
   margin-top: 104px;
+  max-width: 1500px;
   height: calc(80vh - 104px);
+  padding: 0 25px;
+  width: 1200px;
 }
 
 #logo {
@@ -56,6 +58,170 @@ main {
   cursor: pointer;
 }
 
+/* ... (previous styles remain unchanged) ... */
+
+/* Improved Carousel Styles */
+.carousel-section {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 1200px;
+  overflow: hidden;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+}
+
+.carousel-control {
+  background-color: var(--azul-poli);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control:hover:not(:disabled) {
+  background-color: var(--azul-poli-hover);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carousel-control.prev {
+  left: -20px;
+}
+
+.carousel-control.next {
+  right: -20px;
+}
+
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.carousel-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.imagen-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.imagen-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item:hover .imagen-container img {
+  transform: scale(1.05);
+}
+
+.carousel-item h3 {
+  font-family: var(--fuente-titulos);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--azul-poli);
+}
+
+.carousel-item p {
+  font-family: var(--fuente-subtitulos);
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.ver-mas-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--azul-poli);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: var(--fuente-botones);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.ver-mas-btn:hover {
+  background-color: var(--azul-poli-hover);
+  color: var(--amarillo-poli);
+}
+
+.link-titulo {
+  font-family: var(--fuente-titulos);
+  text-align: center;
+  color: var(--azul-poli);
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.link-titulo::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--azul-poli);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.link-titulo:hover {
+  color: var(--azul-poli-hover);
+}
+
+.link-titulo:hover::after {
+  transform: scaleX(1);
+}
+
+/* ... (media queries remain unchanged) ... */
+
+/* Media Queries */
 @media (max-height: 650px) {
   main {
     height: 520px;
@@ -78,6 +244,10 @@ main {
   #texto-bienvenida h2 {
     font-size: 200%;
   }
+
+  .carousel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 849px) {
@@ -96,5 +266,13 @@ main {
     margin-left: 10%;
     text-align: center;
     width: 80%;
+  }
+
+  .carousel-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .carousel-control {
+    display: none;
   }
 }

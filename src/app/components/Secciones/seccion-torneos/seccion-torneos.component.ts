@@ -94,7 +94,7 @@ export class SeccionTorneosComponent implements OnInit {
     fechaActual.setHours(0, 0, 0, 0);
 
     this.torneos.forEach(torneo => {
-      const fechaInicio = new Date(torneo.fechaInicio);
+      const fechaInicio = new Date(torneo.fecha);
       fechaInicio.setHours(0, 0, 0, 0);
 
       const fechaFin = torneo.duracion?.fin ? new Date(torneo.duracion.fin) : null;
@@ -103,13 +103,13 @@ export class SeccionTorneosComponent implements OnInit {
       }
 
       if (fechaInicio.getTime() > fechaActual.getTime()) {
-        torneo.estado = 'Pendiente';
+        torneo.estado = 'pendiente';
       } else if (fechaFin && fechaFin.getTime() < fechaActual.getTime()) {
-        torneo.estado = 'Finalizado';
+        torneo.estado = 'finalizado';
       } else if (fechaFin && fechaInicio.getTime() <= fechaActual.getTime() && fechaFin.getTime() >= fechaActual.getTime()) {
-        torneo.estado = 'En curso';
+        torneo.estado = 'en_curso';
       } else {
-        torneo.estado = 'Pendiente';
+        torneo.estado = 'pendiente';
       }
     });
   }
@@ -117,14 +117,14 @@ export class SeccionTorneosComponent implements OnInit {
   ordenarTorneosPorFecha(): void {
     const fechaActual = new Date();
 
-    const enCurso = this.torneosFiltrados.filter(torneo => torneo.estado === 'En curso');
-    const pendientes = this.torneosFiltrados.filter(torneo => torneo.estado === 'Pendiente');
-    const finalizados = this.torneosFiltrados.filter(torneo => torneo.estado === 'Finalizado');
+    const enCurso = this.torneosFiltrados.filter(torneo => torneo.estado === 'en_curso');
+    const pendientes = this.torneosFiltrados.filter(torneo => torneo.estado === 'pendiente');
+    const finalizados = this.torneosFiltrados.filter(torneo => torneo.estado === 'finalizado');
 
    
     const ordenarPorFecha = (a: Torneo, b: Torneo) => {
-      const fechaA = new Date(a.fechaInicio);
-      const fechaB = new Date(b.fechaInicio);
+      const fechaA = new Date(a.fecha);
+      const fechaB = new Date(b.fecha);
       return Math.abs(fechaA.getTime() - fechaActual.getTime()) - Math.abs(fechaB.getTime() - fechaActual.getTime());
     };
 

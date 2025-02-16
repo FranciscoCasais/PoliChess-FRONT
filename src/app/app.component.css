@@ -252,12 +252,7 @@ header {
   cursor: pointer;
 }
 
-#contenedor-principal {
-  margin: 0 auto;
-  max-width: 1500px;
-  padding: 0 25px;
-  width: 1200px;
-}
+
 
 @media (max-width: 1266px) {
   #contenedor-principal {

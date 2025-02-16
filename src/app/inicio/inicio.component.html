@@ -6,10 +6,57 @@
       <h2>Todo sobre el ajedrez del Poli en un solo lugar</h2>
     </div>
   </div>
+  
   <div id="contenedor-ver-mas">
     <button id="ver-mas" (click)="verMas()">VER MÁS &#9660;</button>
   </div>
-</main>
-<section id="noticias" class="recuadro-blanco">
+</main><section id="noticias" class="carousel-section">
+  <h2 [routerLink]="['/noticias']" class="link-titulo">Noticias</h2>
+  <div class="carousel-container">
+    <button class="carousel-control prev" (click)="cambiarPagina('noticias', 'anterior')" [disabled]="noticiaPagina === 0">&#9664;</button>
+    <div class="carousel-grid">
+      <div class="carousel-item" *ngFor="let noticia of obtenerElementosPagina(noticias, noticiaPagina)" [routerLink]="['/noticia', noticia.id]">
+        <div class="imagen-container">
+          <img [src]="noticia.imagen" alt="Imagen Noticia">
+        </div>
+        <h3>{{ noticia.titulo }}</h3>
+        <p>{{ noticia.copete }}</p>
+        <a class="ver-mas-btn" [routerLink]="['/noticia', noticia.id]" (click)="$event.stopPropagation()">LEER MÁS</a>
+      </div>
+    </div>
+    <button class="carousel-control next" (click)="cambiarPagina('noticias', 'siguiente')" [disabled]="esUltimaPagina('noticias')">&#9654;</button>
+  </div>
+</section>
 
+<section id="jugadores" class="carousel-section">
+  <h2 [routerLink]="['/jugadores']" class="link-titulo">Jugadores</h2>
+  <div class="carousel-container">
+    <button class="carousel-control prev" (click)="cambiarPagina('jugadores', 'anterior')" [disabled]="jugadorPagina === 0">&#9664;</button>
+    <div class="carousel-grid">
+      <div class="carousel-item" *ngFor="let jugador of obtenerElementosPagina(jugadores, jugadorPagina)" [routerLink]="['/jugador', jugador.id]">
+        <div class="imagen-container">
+          <img [src]="jugador.foto" alt="Imagen Jugador">
+        </div>
+        <h3>{{ jugador.nombre }} {{ jugador.apellido }}</h3>
+        <p>Elo Standard: {{ jugador.eloStandard }}</p>
+        <a class="ver-mas-btn" [routerLink]="['/jugador', jugador.id]" (click)="$event.stopPropagation()">VER</a>
+      </div>
+    </div>
+    <button class="carousel-control next" (click)="cambiarPagina('jugadores', 'siguiente')" [disabled]="esUltimaPagina('jugadores')">&#9654;</button>
+  </div>
+</section>
+
+<section id="torneos" class="carousel-section">
+  <h2 [routerLink]="['/torneos']" class="link-titulo">Torneos</h2>
+  <div class="carousel-container">
+    <button class="carousel-control prev" (click)="cambiarPagina('torneos', 'anterior')" [disabled]="torneoPagina === 0">&#9664;</button>
+    <div class="carousel-grid">
+      <div class="carousel-item" *ngFor="let torneo of obtenerElementosPagina(torneos, torneoPagina)" [routerLink]="['/torneo', torneo.id]">
+        <h3>{{ torneo.nombre }}</h3>
+        <p>{{ torneo.descripcion }}</p>
+        <a class="ver-mas-btn" [routerLink]="['/torneo', torneo.id]" (click)="$event.stopPropagation()">VER MÁS</a>
+      </div>
+    </div>
+    <button class="carousel-control next" (click)="cambiarPagina('torneos', 'siguiente')" [disabled]="esUltimaPagina('torneos')">&#9654;</button>
+  </div>
 </section>

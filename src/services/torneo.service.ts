@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Torneo } from "../models/torneo.model";
+import { Torneo } from '../models/torneo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,227 +18,241 @@ export class TorneoService {
       {
         id: 0,
         nombre: "Campeonato Mundial",
-        organizador_id: 1,
-        descripcion: "El campeonato mundial de ajedrez Blitz",
         ritmo: "Blitz",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Buchholz",
-        intervalo_rondas: 30,
-        horario_preferido: "15:00",
-        minimo_jugadores: 2,
-        maximo_jugadores: 16,
-        minimo_elo: 1000,
-        maximo_elo: 3000,
-        estado: "Pendiente"
+        fecha: new Date("2024-01-15"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-01-15T10:00:00"),
+          fin: new Date("2024-01-15T15:00:00")
+        },
+        descripcion: "El campeonato mundial de ajedrez Blitz",
+        ganador: undefined
       },
       {
         id: 1,
         nombre: "Torneo Regional",
-        organizador_id: 2,
+        ritmo: "Standard",
+        fecha: new Date("2025-02-01"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2025-02-01T10:00:00"),
+          fin: new Date("2025-02-01T15:00:00")
+        },
         descripcion: "Un torneo regional para jugadores de todas las edades",
-        ritmo: "Estándar",
-        sistema_emparejamiento: "Todos contra todos",
-        criterio_desempate: "Buchholz mediano",
-        intervalo_rondas: 40,
-        horario_preferido: "16:00",
-        minimo_jugadores: 4,
-        maximo_jugadores: 32,
-        minimo_elo: 800,
-        maximo_elo: 2400,
-        estado: "Pendiente"
+        ganador: undefined
       },
       {
         id: 2,
         nombre: "Torneo Internacional Rápido",
-        organizador_id: 3,
-        descripcion: "Un torneo de ajedrez rápido a nivel internacional",
         ritmo: "Rápido",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Buchholz -1",
-        intervalo_rondas: 25,
-        horario_preferido: "14:00",
-        minimo_jugadores: 6,
-        maximo_jugadores: 40,
-        minimo_elo: 1200,
-        maximo_elo: 2500,
-        estado: "Pendiente"
+        fecha: new Date("2024-01-10"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-01-10T10:00:00"),
+          fin: new Date("2024-01-10T15:00:00")
+        },
+        descripcion: "Un torneo de ajedrez rápido a nivel internacional",
+        ganador: undefined
       },
       {
         id: 3,
         nombre: "Copa Nacional",
-        organizador_id: 4,
+        ritmo: "Standard",
+        fecha: new Date("2024-04-15"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-04-15T10:00:00"),
+          fin: new Date("2024-04-15T15:00:00")
+        },
         descripcion: "Campeonato nacional con los mejores jugadores del país",
-        ritmo: "Estándar",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Sonneborn-Berger",
-        intervalo_rondas: 30,
-        horario_preferido: "15:00",
-        minimo_jugadores: 8,
-        maximo_jugadores: 64,
-        minimo_elo: 1500,
-        maximo_elo: 2800,
-        estado: "Pendiente"
+        ganador: undefined
       },
       {
         id: 4,
         nombre: "Torneo Universitario",
-        organizador_id: 5,
-        descripcion: "Competencia de ajedrez para estudiantes universitarios",
         ritmo: "Blitz",
-        sistema_emparejamiento: "Todos contra todos",
-        criterio_desempate: "Buchholz",
-        intervalo_rondas: 15,
-        horario_preferido: "17:00",
-        minimo_jugadores: 10,
-        maximo_jugadores: 50,
-        minimo_elo: 600,
-        maximo_elo: 2200,
-        estado: "Pendiente"
+        fecha: new Date("2024-05-01"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-05-01T10:00:00"),
+          fin: new Date("2024-05-01T15:00:00")
+        },
+        descripcion: "Competencia de ajedrez para estudiantes universitarios",
+        ganador: undefined
       },
       {
         id: 5,
         nombre: "Copa de Invierno",
-        organizador_id: 6,
+        ritmo: "Standard",
+        fecha: new Date("2024-06-20"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-06-20T10:00:00"),
+          fin: new Date("2024-06-20T15:00:00")
+        },
         descripcion: "Torneo de ajedrez en el frío invierno",
-        ritmo: "Estándar",
-        sistema_emparejamiento: "Todos contra todos (ida y vuelta)",
-        criterio_desempate: "Buchholz mediano",
-        intervalo_rondas: 35,
-        horario_preferido: "16:30",
-        minimo_jugadores: 4,
-        maximo_jugadores: 20,
-        minimo_elo: 1100,
-        maximo_elo: 2700,
-        estado: "Pendiente"
+        ganador: undefined
       },
       {
         id: 6,
         nombre: "Copa Internacional Blitz",
-        organizador_id: 7,
-        descripcion: "Competencia internacional de ajedrez Blitz",
         ritmo: "Blitz",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Sonneborn-Berger",
-        intervalo_rondas: 20,
-        horario_preferido: "14:30",
-        minimo_jugadores: 8,
-        maximo_jugadores: 64,
-        minimo_elo: 1300,
-        maximo_elo: 3000,
-        estado: "Pendiente"
+        fecha: new Date("2024-07-05"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-07-05T10:00:00"),
+          fin: new Date("2024-07-05T15:00:00")
+        },
+        descripcion: "Competencia internacional de ajedrez Blitz",
+        ganador: undefined
       },
       {
         id: 7,
         nombre: "Torneo Juvenil de Ajedrez",
-        organizador_id: 8,
-        descripcion: "Un torneo para jóvenes promesas del ajedrez",
         ritmo: "Rápido",
-        sistema_emparejamiento: "Todos contra todos",
-        criterio_desempate: "Buchholz",
-        intervalo_rondas: 25,
-        horario_preferido: "13:00",
-        minimo_jugadores: 6,
-        maximo_jugadores: 40,
-        minimo_elo: 800,
-        maximo_elo: 2400,
-        estado: "Pendiente"
+        fecha: new Date("2024-08-10"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-08-10T10:00:00"),
+          fin: new Date("2024-08-10T15:00:00")
+        },
+        descripcion: "Un torneo para jóvenes promesas del ajedrez",
+        ganador: undefined
       },
       {
         id: 8,
         nombre: "Torneo Abierto de Ajedrez",
-        organizador_id: 9,
+        ritmo: "Standard",
+        fecha: new Date("2024-09-25"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-09-25T10:00:00"),
+          fin: new Date("2024-09-25T15:00:00")
+        },
         descripcion: "Un torneo abierto para todos los niveles de jugadores",
-        ritmo: "Estándar",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Buchholz -1",
-        intervalo_rondas: 40,
-        horario_preferido: "15:30",
-        minimo_jugadores: 10,
-        maximo_jugadores: 50,
-        minimo_elo: 1000,
-        maximo_elo: 2800,
-        estado: "Pendiente"
+        ganador: undefined
       },
       {
         id: 9,
         nombre: "Copa del Mundo Ajedrez",
-        organizador_id: 10,
-        descripcion: "La copa mundial con los mejores jugadores de ajedrez Blitz",
         ritmo: "Blitz",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Buchholz mediano",
-        intervalo_rondas: 30,
-        horario_preferido: "14:00",
-        minimo_jugadores: 6,
-        maximo_jugadores: 32,
-        minimo_elo: 1400,
-        maximo_elo: 3200,
-        estado: "Pendiente"
+        fecha: new Date("2024-10-05"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-10-05T10:00:00"),
+          fin: new Date("2024-10-05T15:00:00")
+        },
+        descripcion: "La copa mundial con los mejores jugadores de ajedrez Blitz",
+        ganador: undefined
       },
       {
         id: 10,
         nombre: "Campeonato Latinoamericano",
-        organizador_id: 11,
+        ritmo: "Standard",
+        fecha: new Date("2024-11-15"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-11-15T10:00:00"),
+          fin: new Date("2024-11-15T15:00:00")
+        },
         descripcion: "El campeonato de ajedrez más importante de América Latina",
-        ritmo: "Estándar",
-        sistema_emparejamiento: "Todos contra todos",
-        criterio_desempate: "Sonneborn-Berger",
-        intervalo_rondas: 35,
-        horario_preferido: "15:30",
-        minimo_jugadores: 12,
-        maximo_jugadores: 60,
-        minimo_elo: 1200,
-        maximo_elo: 2900,
-        estado: "Pendiente"
+        ganador: undefined
       },
       {
         id: 11,
         nombre: "Torneo de Ajedrez Online",
-        organizador_id: 12,
-        descripcion: "Torneo virtual de ajedrez rápido",
         ritmo: "Rápido",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Buchholz",
-        intervalo_rondas: 20,
-        horario_preferido: "17:00",
-        minimo_jugadores: 4,
-        maximo_jugadores: 50,
-        minimo_elo: 800,
-        maximo_elo: 2500,
-        estado: "Pendiente"
+        fecha: new Date("2024-12-01"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-12-01T10:00:00"),
+          fin: new Date("2024-12-01T15:00:00")
+        },
+        descripcion: "Torneo virtual de ajedrez rápido",
+        ganador: undefined
       },
       {
         id: 12,
         nombre: "Copa Honor a La Crema de fin de año",
-        organizador_id: 13,
-        descripcion: "La copa honor a la crema ha sido un evento importantisimo en el club Gruyere desde tiempos ancestrales.",
         ritmo: "Blitz",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Sonneborn-Berger",
-        intervalo_rondas: 30,
-        horario_preferido: "15:00",
-        minimo_jugadores: 6,
-        maximo_jugadores: 32,
-        minimo_elo: 1300,
-        maximo_elo: 2800,
-        estado: "Pendiente"
+        fecha: new Date("2030-11-08"),
+        hora: "15:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2030-11-08T10:00:00"),
+          fin: new Date("2030-11-08T15:00:00")
+        },
+        descripcion: "La copa honor a la crema ha sido un evento importantisimo en el club Gruyere desde tiempos ancestrales.",
+        ganador: undefined
       },
       {
         id: 13,
         nombre: "Torneo Ludopatia infantil",
-        organizador_id: 14,
-        descripcion: "Torneo en honor a Francisco Casais, cuyo mercado pago fue vaciado y a raiz de la depresión que eso le generó decidió no laburar NIIIIIIIIENPEDO en polichess",
         ritmo: "Blitz",
-        sistema_emparejamiento: "Suizo",
-        criterio_desempate: "Buchholz -1",
-        intervalo_rondas: 15,
-        horario_preferido: "23:00",
-        minimo_jugadores: 4,
-        maximo_jugadores: 20,
-        minimo_elo: 500,
-        maximo_elo: 2200,
-        estado: "Pendiente"
-      }
+        fecha: new Date("2024-12-10"),
+        hora: "23:00",
+        jugadores: new Set(),
+        rankingInicial: new Map(),
+        rankingFinal: new Map(),
+        estado: 'pendiente',
+        duracion: {
+          inicio: new Date("2024-12-10T23:00:00"),
+          fin: new Date("2024-12-10T23:30:00")
+        },
+        descripcion: "Torneo en honor a Francisco Casais, cuyo mercado pago fue vaciado y a raiz de la depresión que eso le generó decidió no laburar NIIIIIIIIENPEDO en polichess",
+        ganador: undefined
+      },
     ];
   }
   

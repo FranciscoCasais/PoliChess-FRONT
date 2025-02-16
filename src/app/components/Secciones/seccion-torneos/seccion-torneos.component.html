@@ -1,62 +1,61 @@
 <section id="inicio">
-    <main id="contenedor-principal">
-      <section id="torneos">
-    
-        <!-- Buscador por nombre -->
-        <div class="buscador">
-          <label for="buscarTorneo">Buscar Torneo por Nombre:</label>
-          <input type="text" id="buscarTorneo" [(ngModel)]="busquedaNombre" (input)="filtrarPorNombre()" placeholder="Nombre del torneo...">
-        </div>
-          
-        <!-- Filtros de Estado -->
-        <div class="filtros">
-          <label for="filtroEstado">Filtrar por Estado:</label>
-          <select id="filtroEstado" [(ngModel)]="filtroEstado" (change)="filtrarTorneosPorEstado()">
-            <option value="todos">Todos</option>
-            <option value="pendiente">No comenzado</option>
-            <option value="en_curso">En Curso</option>
-            <option value="finalizado">Finalizado</option>
-          </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <label for="filtroRitmo">Filtrar por Ritmo:</label>
-          <select id="filtroRitmo" [(ngModel)]="filtroRitmo" (change)="filtrarTorneosPorRitmo()">
-            <option value="todos">Todos</option>
-            <option value="blitz">Blitz</option>
-            <option value="rapido">Rápido</option>
-            <option value="standard">Standard</option>
-          </select>
-        </div>
+  <main id="contenedor-principal">
+    <section id="torneos">
   
-        <!-- Iterar sobre la lista de torneos con *ngFor -->
-        <div *ngFor="let torneo of getTorneosPaginaActual()" class="torneo-card">
-          <a [routerLink]="['/torneo', torneo.id]" class="torneo-link">
-            <div class="torneo-info">
-              <div class="torneo-detalles">
-                <h3>{{ torneo.nombre }}</h3>
-                <h4>Ritmo: {{ torneo.ritmo }}</h4>
-                <h4>Fecha: {{ torneo.fecha | date }}</h4>
-                <!-- Clase dinámica para el estado -->
-                <h4>Estado: 
-                    <span [ngClass]="{
-                      'estado-finalizado': torneo.estado === 'finalizado',
-                      'estado-en-curso': torneo.estado === 'en_curso',
-                      'estado-pendiente': torneo.estado === 'pendiente'
-                    }">
-                      {{ getEstadoTorneo(torneo.estado ?? 'pendiente') }}
-                    </span>
-                </h4>
-              </div>
+      <!-- Buscador por nombre -->
+      <div class="buscador">
+        <label for="buscarTorneo">Buscar Torneo por Nombre:</label>
+        <input type="text" id="buscarTorneo" [(ngModel)]="busquedaNombre" (input)="filtrarPorNombre()" placeholder="Nombre del torneo...">
+      </div>
+        
+      <!-- Filtros de Estado -->
+      <div class="filtros">
+        <label for="filtroEstado">Filtrar por Estado:</label>
+        <select id="filtroEstado" [(ngModel)]="filtroEstado" (change)="filtrarTorneosPorEstado()">
+          <option value="todos">Todos</option>
+          <option value="pendiente">No comenzado</option>
+          <option value="en_curso">En Curso</option>
+          <option value="finalizado">Finalizado</option>
+        </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label for="filtroRitmo">Filtrar por Ritmo:</label>
+        <select id="filtroRitmo" [(ngModel)]="filtroRitmo" (change)="filtrarTorneosPorRitmo()">
+          <option value="todos">Todos</option>
+          <option value="blitz">Blitz</option>
+          <option value="rapido">Rápido</option>
+          <option value="standard">Standard</option>
+        </select>
+      </div>
+
+      <!-- Iterar sobre la lista de torneos con *ngFor -->
+      <div *ngFor="let torneo of getTorneosPaginaActual()" class="torneo-card">
+        <a [routerLink]="['/torneo', torneo.id]" class="torneo-link">
+          <div class="torneo-info">
+            <div class="torneo-detalles">
+              <h3>{{ torneo.nombre }}</h3>
+              <h4>Ritmo: {{ torneo.ritmo }}</h4>
+              <h4>Fecha: {{ torneo.fecha | date }}</h4>
+              <!-- Clase dinámica para el estado -->
+              <h4>Estado: 
+                  <span [ngClass]="{
+                    'estado-finalizado': torneo.estado === 'finalizado',
+                    'estado-en-curso': torneo.estado === 'en_curso',
+                    'estado-pendiente': torneo.estado === 'pendiente'
+                  }">
+                    {{ getEstadoTorneo(torneo.estado ?? 'pendiente') }}
+                  </span>
+              </h4>
             </div>
-          </a>
-        </div>
-  
-        <!-- Paginación -->
-        <div class="paginacion">
-          <button (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
-          <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
-          <button (click)="irPaginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
-        </div>
-  
-      </section>
-    </main>
-  </section>
-  
+          </div>
+        </a>
+      </div>
+
+      <!-- Paginación -->
+      <div class="paginacion">
+        <button (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+        <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+        <button (click)="irPaginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+      </div>
+
+    </section>
+  </main>
+</section>
