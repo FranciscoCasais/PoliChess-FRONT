@@ -40,7 +40,7 @@
           <img alt="Icono predeterminado seleccionado" class="icono-login" src="iconologinhover.png" *ngIf="cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
         </div>
 
-        <span id="texto-login" *ngIf="!navbarAchicado">Iniciar sesión</span>
+        <span id="texto-login" *ngIf="!navbarAchicado">Mi perfil</span>
       </a>
     </div>
 
@@ -96,7 +96,7 @@
 
 <div id="contenedor-desplegable-perfil" class="contenedor-secciones-desplegable" *ngIf="perfil" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
   <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
-  <a (click)="togglePerfil()" [routerLink]="['']">Ver mi perfil</a>
+  <a (click)="togglePerfil()" [routerLink]="['perfil']">Ver mi perfil</a>
   <a (click)="togglePerfil(); this.loginService.logout()" [ngStyle]="{ cursor: 'pointer' }">Cerrar sesión</a>
 </div>
 

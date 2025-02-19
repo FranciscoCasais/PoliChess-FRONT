@@ -23,13 +23,13 @@ export class LoginService {
     return this.localStorage ? !!this.localStorage.getItem('token') : false;
   }
 
-  setToken(token: string) {
+  public setToken(token: string) {
     if (!!this.localStorage) {
       this.localStorage.setItem("token", token);
     }
   }
 
-  logout() {
+  public logout() {
     if (!!this.localStorage) {
       this.localStorage.removeItem("token");
       window.location.reload();
