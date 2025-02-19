@@ -1,7 +1,8 @@
 import { CommonModule, isPlatformBrowser, NgIf } from '@angular/common';
 import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { LoginService } from '../services/login/login.service';
+import { UsuarioService } from './services/usuario/usuario.service';
+import { LoginService } from './services/login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +25,13 @@ export class AppComponent {
   public cursorEncimaLogin: boolean = false;
   public cursorEncimaTresLineas: boolean = false;
   public navbarAchicado: boolean = false;
+  public perfil: boolean = false;
   public registro: boolean = false;
   public tresLineas: boolean = false;
   public ventanaLoginRegistro: boolean = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, public loginService: LoginService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, public loginService: LoginService,
+    private usuarioService: UsuarioService) {
     this.navbarAchicado = false;
   }
 
@@ -36,6 +39,10 @@ export class AppComponent {
     if(isPlatformBrowser(this.platformId)) {
       this.onWindowScroll();
     }
+  }
+
+  public togglePerfil(): void {
+    this.perfil = !this.perfil;
   }
 
   public toggleRegistro(): void {
@@ -69,19 +76,15 @@ export class AppComponent {
 
   @HostListener('document:click', ['$event'])
   public cerrarVentanaLoginRegistro(event: Event): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      console.log("Ya hay un token guardado");
-    } else {
-      console.log("No hay token guardado");
-    }
-
-    const contenedorSeccionesDesplegable = document.getElementById('contenedor-secciones-desplegable');
+    const contenedorDesplegablePerfil = document.getElementById('contenedor-desplegable-perfil');
+    const tres_lineas = document.getElementById('tres-lineas');
     const ventanaLoginRegistro = document.getElementById('ventana-login-registro');
 
-    if ((contenedorSeccionesDesplegable && !contenedorSeccionesDesplegable.contains(event.target as Node)) ||
+    if ((contenedorDesplegablePerfil && !contenedorDesplegablePerfil.contains(event.target as Node)) ||
+      (tres_lineas && !tres_lineas.contains(event.target as Node)) ||
       (ventanaLoginRegistro && !ventanaLoginRegistro.contains(event.target as Node))) {
       document.body.style.overflowY = 'auto';
+      this.perfil = false;
       this.tresLineas = false;
       this.ventanaLoginRegistro = false;
     }
@@ -101,18 +104,69 @@ export class AppComponent {
   public login(evento: Event) {
     evento.preventDefault();
 
-    const usuario = (document.getElementById('usuario') as HTMLInputElement).value;
-    const contrasena = (document.getElementById('contrasena') as HTMLInputElement).value;
+    const usuario = (document.getElementById('usuario1') as HTMLInputElement).value;
+    const contrasena = (document.getElementById('contrasena1') as HTMLInputElement).value;
 
     this.loginService.login(usuario, contrasena).subscribe({
       next: (res: any) => {
         alert("Login exitoso");
         this.loginService.setToken(res.token);
+        window.location.reload();
+        // this.ventanaLoginRegistro = false;
+        // document.body.style.overflowY = 'auto';
       },
       error: (err) => {
         console.log(err);
         if (err.status === 401) {
           alert("Credenciales incorrectas");
+        } else {
+          alert("Error en el servidor. Inténtalo más tarde.");
+        }
+      }
+    });
+  }
+
+  public registrarse(evento: Event) {
+    evento.preventDefault();
+
+    const nombre = (document.getElementById('nombre') as HTMLInputElement).value;
+    const apellido = (document.getElementById('apellido') as HTMLInputElement).value;
+    const usuario = (document.getElementById('usuario2') as HTMLInputElement).value;
+    const contrasena = (document.getElementById('contrasena2') as HTMLInputElement).value;
+    const confirmarContrasena = (document.getElementById('contrasena3') as HTMLInputElement).value;
+
+    if (contrasena !== confirmarContrasena) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    this.usuarioService.agregar(nombre, apellido, usuario, contrasena).subscribe({
+      next: (res: any) => {
+        alert("Registro exitoso");
+
+        this.loginService.login(usuario, contrasena).subscribe({
+          next: (res: any) => {
+            this.loginService.setToken(res.token);
+          },
+          error: (err) => {
+            console.log(err);
+            if (err.status === 401) {
+              alert("Credenciales incorrectas");
+            } else {
+              alert("Error en el servidor. Inténtalo más tarde.");
+            }
+          }
+        });
+
+        window.location.reload();
+
+        // this.ventanaLoginRegistro = false;
+        // document.body.style.overflowY = 'auto';
+      },
+      error: (err) => {
+        console.log(err);
+        if (err.status === 409) {
+          alert("El nombre de usuario ya está en uso");
         } else {
           alert("Error en el servidor. Inténtalo más tarde.");
         }

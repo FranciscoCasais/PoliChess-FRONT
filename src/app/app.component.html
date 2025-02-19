@@ -22,9 +22,20 @@
       <a [routerLink]="['']">CALENDARIO</a>
     </div>
 
-    <div id="contenedor-login">
+    <div class="contenedor-login" *ngIf="!this.loginService.isAuthenticated()">
       <a (click)="toggleVentanaLoginRegistro()" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
-        <div id="contenedor-icono-login">
+        <div class="contenedor-icono-login">
+          <img alt="Icono predeterminado" class="icono-login" src="iconologin.png" *ngIf="!cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
+          <img alt="Icono predeterminado seleccionado" class="icono-login" src="iconologinhover.png" *ngIf="cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
+        </div>
+
+        <span id="texto-login" *ngIf="!navbarAchicado">Iniciar sesión</span>
+      </a>
+    </div>
+
+    <div class="contenedor-login" *ngIf="this.loginService.isAuthenticated()">
+      <a (click)="togglePerfil()" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
+        <div class="contenedor-icono-login">
           <img alt="Icono predeterminado" class="icono-login" src="iconologin.png" *ngIf="!cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
           <img alt="Icono predeterminado seleccionado" class="icono-login" src="iconologinhover.png" *ngIf="cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
         </div>
@@ -38,7 +49,7 @@
 
 <div id="fondo-sombreado" *ngIf="ventanaLoginRegistro || tresLineas" [ngClass]="ventanaLoginRegistro ? 'sombreado' : 'no-sombreado'"></div>
 
-<div id="contenedor-secciones-desplegable" *ngIf="tresLineas" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
+<div id="tres-lineas" class="contenedor-secciones-desplegable" *ngIf="tresLineas" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
   <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
   <a (click)="toggleTresLineas()" [routerLink]="['noticias']">NOTICIAS</a>
   <a (click)="toggleTresLineas()" [routerLink]="['']">RANKING</a>
@@ -61,19 +72,32 @@
     </div>
   </div>
 
-  <form id="formulario">
-    <input type="text" id="nombre" name="nombre" placeholder="Nombre" *ngIf="registro">
-    <input type="text" id="apellido" name="apellido" placeholder="Apellido" *ngIf="registro">
-    <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario">
-    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña">
-    <input type="password" id="contrasena2" name="contrasena2" placeholder="Confirmar contraseña" *ngIf="registro">
+  <form class="formulario" *ngIf="!registro">
+    <input type="text" id="usuario1" name="usuario" placeholder="Nombre de usuario" required>
+    <input type="password" id="contrasena1" name="contrasena" placeholder="Contraseña" required>
 
-    <p *ngIf="!registro">¿No tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Registrate</span></p>
-    <p *ngIf="registro">¿Ya tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Iniciá sesión</span></p>
+    <p>¿No tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Registrate</span></p>
 
-    <button type="submit" (click)="login($event)" *ngIf="!registro">INICIAR SESIÓN</button>
-    <button type="submit" *ngIf="registro">REGISTRARSE</button>
+    <button type="submit" (click)="login($event)">INICIAR SESIÓN</button>
   </form>
+
+  <form class="formulario" *ngIf="registro">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+    <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+    <input type="text" id="usuario2" name="usuario" placeholder="Nombre de usuario" required>
+    <input type="password" id="contrasena2" name="contrasena" placeholder="Contraseña" required>
+    <input type="password" id="contrasena3" name="contrasena" placeholder="Confirmar contraseña" required>
+
+    <p>¿Ya tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Iniciá sesión</span></p>
+
+    <button type="submit" (click)="registrarse($event)">REGISTRARSE</button>
+  </form>
+</div>
+
+<div id="contenedor-desplegable-perfil" class="contenedor-secciones-desplegable" *ngIf="perfil" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
+  <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
+  <a (click)="togglePerfil()" [routerLink]="['']">Ver mi perfil</a>
+  <a (click)="togglePerfil(); this.loginService.logout()" [ngStyle]="{ cursor: 'pointer' }">Cerrar sesión</a>
 </div>
 
 <div id="contenedor-principal">
