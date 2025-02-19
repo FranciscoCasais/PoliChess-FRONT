@@ -6,14 +6,6 @@
         <img alt="Menú cerrado" class="icono-tres-lineas" src="iconotreslineas.png" *ngIf="!cursorEncimaTresLineas && !tresLineas">
         <img alt="Menú abierto" class="icono-tres-lineas" src="iconotreslineashover.png" *ngIf="cursorEncimaTresLineas || tresLineas">
       </a>
-
-      <div id="contenedor-secciones-desplegable" *ngIf="tresLineas" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
-        <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
-        <a (click)="toggleTresLineas()" [routerLink]="['noticias']">NOTICIAS</a>
-        <a (click)="toggleTresLineas()" [routerLink]="['']">RANKING</a>
-        <a (click)="toggleTresLineas()" [routerLink]="['']">TORNEOS</a>
-        <a (click)="toggleTresLineas()" [routerLink]="['']">CALENDARIO</a>
-      </div>
     </div>
 
     <div id="contenedor-logo-navbar">
@@ -44,7 +36,15 @@
   </nav>
 </header>
 
-<div id="fondo-sombreado" *ngIf="ventanaLoginRegistro"></div>
+<div id="fondo-sombreado" *ngIf="ventanaLoginRegistro || tresLineas" [ngClass]="ventanaLoginRegistro ? 'sombreado' : 'no-sombreado'"></div>
+
+<div id="contenedor-secciones-desplegable" *ngIf="tresLineas" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
+  <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
+  <a (click)="toggleTresLineas()" [routerLink]="['noticias']">NOTICIAS</a>
+  <a (click)="toggleTresLineas()" [routerLink]="['']">RANKING</a>
+  <a (click)="toggleTresLineas()" [routerLink]="['']">TORNEOS</a>
+  <a (click)="toggleTresLineas()" [routerLink]="['']">CALENDARIO</a>
+</div>
 
 <div id="ventana-login-registro" *ngIf="ventanaLoginRegistro">
   <div id="seccion-superior">
@@ -62,15 +62,16 @@
   </div>
 
   <form id="formulario">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre" *ngIf="registro">
+    <input type="text" id="apellido" name="apellido" placeholder="Apellido" *ngIf="registro">
     <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario">
-    <input type="text" id="usuario2" name="usuario2" placeholder="Confirmar nombre de usuario" *ngIf="registro">
     <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña">
     <input type="password" id="contrasena2" name="contrasena2" placeholder="Confirmar contraseña" *ngIf="registro">
 
     <p *ngIf="!registro">¿No tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Registrate</span></p>
     <p *ngIf="registro">¿Ya tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Iniciá sesión</span></p>
 
-    <button type="submit" *ngIf="!registro">INICIAR SESIÓN</button>
+    <button type="submit" (click)="login($event)" *ngIf="!registro">INICIAR SESIÓN</button>
     <button type="submit" *ngIf="registro">REGISTRARSE</button>
   </form>
 </div>

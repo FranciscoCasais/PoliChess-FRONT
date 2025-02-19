@@ -48,6 +48,7 @@ header {
 
 #contenedor-secciones-desplegable a {
   font-size: 125%;
+  z-index: 1000;
 }
 
 #contenedor-tres-lineas a:hover, #contenedor-tres-lineas a.tres-lineas-activo {
@@ -131,15 +132,22 @@ header {
   height: 40px;
 }
 
-#fondo-sombreado {
+.sombreado {
   background-color: black;
+  opacity: 0.33;
+}
+
+.no-sombreado {
+  background-color: transparent;
+}
+
+#fondo-sombreado {
   height: 100vh;
   left: 0;
-  opacity: 0.33;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 500;
 }
 
 #ventana-login-registro {
