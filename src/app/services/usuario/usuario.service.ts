@@ -13,6 +13,14 @@ export class UsuarioService {
     return this.http.get(`${this.BASE_URL}/${id}`);
   }
 
+  public obtenerAlgunosPorBusqueda(busqueda: string, pagina: number) {
+    return this.http.get(`${this.BASE_URL}/pagina/${pagina}/busqueda/${busqueda}`);
+  }
+
+  public obtenerAlgunosPorElo(pagina: number, elo: string) {
+    return this.http.get(`${this.BASE_URL}/pagina/${pagina}/${elo}`);
+  }
+
   public agregar(nombre: string, apellido: string, nombre_usuario: string, contrasena_hash: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -34,7 +42,6 @@ export class UsuarioService {
 
   public eliminar(id: number) {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
 

@@ -13,6 +13,14 @@ export class NoticiaService {
     return this.http.get(`${this.BASE_URL}/${id}`);
   }
 
+  public obtenerAlgunos(pagina: number) {
+    return this.http.get(`${this.BASE_URL}/${pagina}`)
+  }
+
+  public obtenerAlgunosPorBusqueda(busqueda: string, pagina: number) {
+    return this.http.get(`${this.BASE_URL}/pagina/${pagina}/busqueda/${busqueda}`)
+  }
+
   public agregar(noticia: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -21,5 +29,24 @@ export class NoticiaService {
 
     const body = noticia;
     return this.http.post(this.BASE_URL, body, { headers });
+  }
+
+  public editar(noticia: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+
+    const body = noticia;
+    return this.http.put(this.BASE_URL, body, { headers });
+  }
+
+  public eliminar(id: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.delete(this.BASE_URL, { headers });
   }
 }

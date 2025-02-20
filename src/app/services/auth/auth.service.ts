@@ -22,8 +22,11 @@ export class AuthService {
   }
 
   getUsuario() {
+    console.log(this.localStorage);
     if (!!this.localStorage) {
+      console.log(this.localStorage.getItem("usuarioActual"));
       const usuarioGuardado = this.localStorage.getItem("usuarioActual");
+      console.log(usuarioGuardado);
       return usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
     }
   }

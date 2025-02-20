@@ -149,10 +149,11 @@ export class PerfilComponent {
       next: () => {
         alert("Perfil editado exitosamente.");
         const decoded: { id: number; isAdmin: boolean } = jwtDecode(localStorage.getItem("token")!);
-
         this.usuarioService.obtenerUno(decoded.id).subscribe({
           next: (data: any) => {
             this.authService.setUsuario(data);
+            console.log(data);
+            alert("hola");
             window.location.reload();
           },
           error: (err) => {
