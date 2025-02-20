@@ -21,4 +21,23 @@ export class UsuarioService {
     const body = { nombre, apellido, nombre_usuario, contrasena_hash };
     return this.http.post(this.BASE_URL, body, { headers });
   }
+
+  public editar(usuario: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+
+    const body = { usuario };
+    return this.http.put(`${this.BASE_URL}`, body, { headers });
+  }
+
+  public eliminar(id: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.delete(`${this.BASE_URL}/${id}`, { headers });
+  }
 }

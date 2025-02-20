@@ -39,23 +39,6 @@ main {
   margin-bottom: 10%;
 }
 
-#ver-mas {
-  background-color: var(--azul-poli);
-  border-radius: 7.5px;
-  box-shadow: 0 10px 40px 0 black;
-  color: white;
-  font-size: 125%;
-  font-family: var(--fuente-botones);
-  font-weight: bolder;
-  padding: 20px;
-}
-
-#ver-mas:hover {
-  background-color: var(--azul-poli-hover);
-  color: var(--amarillo-poli);
-  cursor: pointer;
-}
-
 @media (max-height: 650px) {
   main {
     height: 520px;

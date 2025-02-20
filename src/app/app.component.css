@@ -273,6 +273,23 @@ header {
   width: 1200px;
 }
 
+#contenedor-cerrar-sesion {
+  display: flex;
+  gap: 25px;
+}
+
+#cerrar-sesion {
+  background-color: rgb(255, 50, 50);
+  border: 2px solid rgb(255, 50, 50);
+  color: white;
+}
+
+#cerrar-sesion:hover {
+  background-color: rgb(200, 0, 0);
+  border: 2px solid rgb(200, 0, 0);
+  cursor: pointer;
+}
+
 @media (max-width: 1266px) {
   #contenedor-principal {
     width: calc(100% - 50px);

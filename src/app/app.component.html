@@ -23,7 +23,7 @@
     </div>
 
     <div class="contenedor-login" *ngIf="!this.loginService.isAuthenticated()">
-      <a (click)="toggleVentanaLoginRegistro()" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
+      <a (click)="toggleVentanaLoginRegistro(false)" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
         <div class="contenedor-icono-login">
           <img alt="Icono predeterminado" class="icono-login" src="iconologin.png" *ngIf="!cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
           <img alt="Icono predeterminado seleccionado" class="icono-login" src="iconologinhover.png" *ngIf="cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
@@ -60,28 +60,29 @@
 <div id="ventana-login-registro" *ngIf="ventanaLoginRegistro">
   <div id="seccion-superior">
     <div id="contenedor-titulo">
-      <h3 *ngIf="!registro">Inicio de sesión</h3>
-      <h3 *ngIf="registro">Registro</h3>
+      <h3 *ngIf="!registro && !logout">Inicio de sesión</h3>
+      <h3 *ngIf="registro && !logout">Registro</h3>
+      <h3 *ngIf="logout">Cerrar sesión</h3>
     </div>
 
     <div id="contenedor-cerrar">
-      <a (mouseenter)="cursorEncimaCerrar = true" (click)="toggleVentanaLoginRegistro()" (mouseleave)="cursorEncimaCerrar = false">
+      <a (mouseenter)="cursorEncimaCerrar = true" (click)="toggleVentanaLoginRegistro(false)" (mouseleave)="cursorEncimaCerrar = false">
         <img alt="Cerrar" class="icono-cerrar" src="iconocerrar.png" *ngIf="!cursorEncimaCerrar">
         <img alt="Cerrar seleccionado" class="icono-cerrar" src="iconocerrarhover.png" *ngIf="cursorEncimaCerrar">
       </a>
     </div>
   </div>
 
-  <form class="formulario" *ngIf="!registro">
+  <form class="formulario" (submit)="login($event, ['usuario1', 'contrasena1'], true)" *ngIf="!registro && !logout">
     <input type="text" id="usuario1" name="usuario" placeholder="Nombre de usuario" required>
     <input type="password" id="contrasena1" name="contrasena" placeholder="Contraseña" required>
 
     <p>¿No tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Registrate</span></p>
 
-    <button type="submit" (click)="login($event)">INICIAR SESIÓN</button>
+    <button type="submit">INICIAR SESIÓN</button>
   </form>
 
-  <form class="formulario" *ngIf="registro">
+  <form class="formulario" (submit)="registrarse($event)" *ngIf="registro && !logout">
     <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
     <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
     <input type="text" id="usuario2" name="usuario" placeholder="Nombre de usuario" required>
@@ -90,14 +91,24 @@
 
     <p>¿Ya tenés cuenta? <span class="texto-intercambiar" (click)="toggleRegistro()">Iniciá sesión</span></p>
 
-    <button type="submit" (click)="registrarse($event)">REGISTRARSE</button>
+    <button type="submit">REGISTRARSE</button>
   </form>
+
+  <form class="formulario" (submit)="loginService.logout(); authService.logout()" *ngIf="logout">
+    <p>¿Estás seguro de que querés cerrar sesión?</p>
+
+    <div id="contenedor-cerrar-sesion">
+      <button id="cerrar-sesion" type="submit">CERRAR SESIÓN</button>
+      <button type="button" (click)="toggleVentanaLoginRegistro(false)">Cancelar</button>
+    </div>
+    
+  </form>  
 </div>
 
 <div id="contenedor-desplegable-perfil" class="contenedor-secciones-desplegable" *ngIf="perfil" [ngClass]="navbarAchicado ? 'elevado' : 'no-elevado'">
   <!-- CAMBIAR CADA SECCIÓN CON CADA COMPONENTE CUANDO SE HAGAN -->
   <a (click)="togglePerfil()" [routerLink]="['perfil']">Ver mi perfil</a>
-  <a (click)="togglePerfil(); this.loginService.logout()" [ngStyle]="{ cursor: 'pointer' }">Cerrar sesión</a>
+  <a (click)="togglePerfil(); toggleVentanaLoginRegistro(true)" [ngStyle]="{ cursor: 'pointer' }">Cerrar sesión</a>
 </div>
 
 <div id="contenedor-principal">

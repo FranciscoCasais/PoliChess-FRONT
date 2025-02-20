@@ -3,6 +3,8 @@ import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { UsuarioService } from './services/usuario/usuario.service';
 import { LoginService } from './services/login/login.service';
+import { AuthService } from './services/auth/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,7 @@ export class AppComponent {
   public cursorEncimaCerrar: boolean = false;
   public cursorEncimaLogin: boolean = false;
   public cursorEncimaTresLineas: boolean = false;
+  public logout: boolean = false;
   public navbarAchicado: boolean = false;
   public perfil: boolean = false;
   public registro: boolean = false;
@@ -31,7 +34,7 @@ export class AppComponent {
   public ventanaLoginRegistro: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, public loginService: LoginService,
-    private usuarioService: UsuarioService) {
+    private usuarioService: UsuarioService, public authService: AuthService) {
     this.navbarAchicado = false;
   }
 
@@ -53,9 +56,10 @@ export class AppComponent {
     this.tresLineas = !this.tresLineas;
   }
 
-  public toggleVentanaLoginRegistro(): void {
+  public toggleVentanaLoginRegistro(logout: boolean): void {
     this.cursorEncimaCerrar = false;
     this.registro = false;
+    this.logout = logout;
     this.ventanaLoginRegistro = !this.ventanaLoginRegistro;
 
     if (this.ventanaLoginRegistro) {
@@ -101,17 +105,37 @@ export class AppComponent {
     }
   }
 
-  public login(evento: Event) {
+  public async login(evento: Event, campos: string[], login: boolean) {
     evento.preventDefault();
 
-    const usuario = (document.getElementById('usuario1') as HTMLInputElement).value;
-    const contrasena = (document.getElementById('contrasena1') as HTMLInputElement).value;
+    const usuario = (document.getElementById(campos[0]) as HTMLInputElement).value;
+    const contrasena = (document.getElementById(campos[1]) as HTMLInputElement).value;
 
     this.loginService.login(usuario, contrasena).subscribe({
       next: (res: any) => {
-        alert("Login exitoso");
         this.loginService.setToken(res.token);
-        window.location.reload();
+        const decoded: { id: number; isAdmin: boolean } = jwtDecode(res.token);
+
+        this.usuarioService.obtenerUno(decoded.id).subscribe({
+          next: (data: any) => {
+            this.authService.setUsuario(data);
+
+            if (login) {
+              alert("Login exitoso");
+            }
+            
+            window.location.reload();
+            // this.usuarioActual = data;
+          },
+          error: (err) => {
+            console.log(err);
+            if (err.status === 401) {
+              alert("Credenciales incorrectas");
+            } else {
+              alert("Error en el servidor. Inténtalo más tarde.");
+            }
+          }
+        });
         // this.ventanaLoginRegistro = false;
         // document.body.style.overflowY = 'auto';
       },
@@ -144,21 +168,7 @@ export class AppComponent {
       next: (res: any) => {
         alert("Registro exitoso");
 
-        this.loginService.login(usuario, contrasena).subscribe({
-          next: (res: any) => {
-            this.loginService.setToken(res.token);
-          },
-          error: (err) => {
-            console.log(err);
-            if (err.status === 401) {
-              alert("Credenciales incorrectas");
-            } else {
-              alert("Error en el servidor. Inténtalo más tarde.");
-            }
-          }
-        });
-
-        window.location.reload();
+        this.login(evento, ['usuario2', 'contrasena2'], false);
 
         // this.ventanaLoginRegistro = false;
         // document.body.style.overflowY = 'auto';

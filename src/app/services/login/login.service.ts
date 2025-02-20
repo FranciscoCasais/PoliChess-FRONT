@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE } from '../../local-storage.token';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,21 @@ export class LoginService {
       this.localStorage.removeItem("token");
       window.location.reload();
     }
+  }
+
+  public isAdmin(): boolean {
+    if (!!this.isAuthenticated()) {
+      const decoded: { id: number; isAdmin: boolean } = jwtDecode(this.localStorage!.getItem("token")!);
+      return decoded.isAdmin;
+    }
+    return false;
+  }
+
+  public getUsuarioId(): number | null {
+    if (!!this.isAuthenticated()) {
+      const decoded: { id: number; isAdmin: boolean } = jwtDecode(this.localStorage!.getItem("token")!);
+      return decoded.id;
+    }
+    return null;
   }
 }

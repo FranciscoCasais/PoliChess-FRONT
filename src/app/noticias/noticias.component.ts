@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './noticias.component.css'
 })
 export class NoticiasComponent {
-
+  title = "Noticias";
 }
