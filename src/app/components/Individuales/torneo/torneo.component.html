@@ -1,40 +1,28 @@
 <div *ngIf="torneo" class="torneo-container">
-    <div class="torneo-card">
-      <h2>{{ torneo.nombre }}</h2>
-      <div class="torneo-info">
+  <div class="torneo-card">
+    <h2>{{ torneo.nombre }}</h2>
+    <div class="torneo-info">
+      <div class="informacion-principal">
         <h4>Ritmo: {{ torneo.ritmo }}</h4>
         <h4>Fecha: {{ torneo.fecha | date }}</h4>
         <h4>Hora: {{ torneo.hora }}hs</h4>
-        <!-- <h4>Estado: {{ getEstadoTorneo(torneo.estado) }}</h4> -->
-         <h4>Duración: 
+        <h4>Duración: 
           {{ torneo.duracion?.inicio | date }} - 
           {{ torneo.duracion?.fin | date }}
-        </h4> <!-- no se pq muestra fecha + 1 dia --> 
+        </h4>
         <h4>Descripción:</h4>
         <p>{{ torneo.descripcion || 'Sin descripción disponible.' }}</p>
-        <button [routerLink]="['/detalles-torneo', torneo.id]">Ver detalles</button>
         
-        <!-- 
-        <h4>Ganador:</h4>
-        <p *ngIf="torneo.ganador">{{ torneo.ganador.nombre }}</p>
-        <p *ngIf="!torneo.ganador">Aún no hay un ganador definido.</p>
-  
-        <h4>Jugadores Participantes:</h4>
-        <ul>
-          <li *ngFor="let jugador of torneo.jugadores">{{ jugador.nombre }}</li>
-        </ul>
-  
-        <h4>Ranking Inicial:</h4>
-        <ul>
-          <li *ngFor="let jugador of rankingInicial">{{ jugador.posicion }}. {{ jugador.jugador.nombre }}</li>
-        </ul>
-  
-        <h4>Ranking Final:</h4>
-        <ul *ngIf="rankingFinal.length > 0">
-          <li *ngFor="let jugador of rankingFinal">{{ jugador.posicion }}. {{ jugador.jugador.nombre }}</li>
-        </ul>
-        <p *ngIf="rankingFinal.length === 0">El ranking final aún no está disponible.</p>
-    -->
+      </div>
+
+      <div class="jugadores">
+        <h4>Jugadores inscritos:</h4>
+        <div class="jugadores-lista">
+          <div *ngFor="let jugador of torneo.jugadores" class="jugador" (click)="verPerfilJugador(jugador.id)">
+            <p>{{ jugador.nombre }} {{ jugador.apellido }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>

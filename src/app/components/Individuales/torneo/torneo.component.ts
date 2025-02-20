@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TorneoService } from '../../../../services/torneo.service'; // Ajusta según tu estructura
 import { Torneo } from '../../../../models/torneo.model'; // Ajusta según tu estructura
 import { CommonModule } from '@angular/common';
@@ -8,9 +8,9 @@ import { RouterModule } from '@angular/router'; // Asegúrate de tener esto impo
 @Component({
   selector: 'app-torneo',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './torneo.component.html',
-  styleUrl: './torneo.component.css'
+  styleUrls: ['./torneo.component.css']
 })
 export class TorneoComponent implements OnInit {
   torneo: Torneo | undefined;
@@ -19,7 +19,8 @@ export class TorneoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private torneoService: TorneoService
+    private torneoService: TorneoService,
+    private router: Router 
   ) {}
 
   ngOnInit(): void {
@@ -28,25 +29,10 @@ export class TorneoComponent implements OnInit {
       const torneo = this.torneoService.obtenerTorneoPorId(Number(id));
       if (torneo) {
         this.torneo = torneo;
-        this.cargarRankings();
       }
     }
   }
 
-  cargarRankings(): void {
-    if (this.torneo) {
-      // Convertir Map a un array ordenado por posición
-      this.rankingInicial = Array.from(this.torneo.rankingInicial).map(([posicion, jugador]) => ({
-        posicion,
-        jugador
-      }));
-
-      this.rankingFinal = Array.from(this.torneo.rankingFinal).map(([posicion, jugador]) => ({
-        posicion,
-        jugador
-      }));
-    }
-  }
 
   getEstadoTorneo(estado: string | undefined): string {
     switch (estado) {
@@ -59,5 +45,10 @@ export class TorneoComponent implements OnInit {
       default:
         return 'Desconocido';
     }
+  }
+
+  // Función para redirigir a la página del perfil del jugador
+  verPerfilJugador(id: number): void {
+    this.router.navigate([`/jugador/${id}`]); // Redirige a la ruta del perfil del jugador
   }
 }

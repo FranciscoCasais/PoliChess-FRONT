@@ -9,8 +9,6 @@ export interface Torneo {
   fecha: Date;
   hora: string; // Hora como string en formato HH:mm
   jugadores: Set<Jugador>;
-  rankingInicial: Map<number, Jugador>;
-  rankingFinal: Map<number, Jugador>;
   ganador?: Jugador;  
   estado?: 'pendiente' | 'en_curso' | 'finalizado';
   duracion?: { inicio: Date; fin: Date };
@@ -23,8 +21,6 @@ function new_(
   fecha?: Date,
   hora?: string, // Hora como string
   jugadores: Set<Jugador> = new Set(),
-  rankingInicial: Map<number, Jugador> = new Map(),
-  rankingFinal: Map<number, Jugador> = new Map(),
   ganador?: Jugador,
   id?: number,
   estado?: 'pendiente' | 'en_curso' | 'finalizado',
@@ -38,8 +34,6 @@ function new_(
     fecha: fecha ?? new Date(),
     hora: hora ?? "", 
     jugadores: jugadores,
-    rankingInicial: rankingInicial,
-    rankingFinal: rankingFinal,
     ganador: ganador,
     estado: estado ?? 'pendiente',
     duracion: duracion ?? undefined,
@@ -58,8 +52,6 @@ function from(param: object): Torneo {
     p.fecha,
     p.hora, // Hora como string
     p.jugadores,
-    p.rankingInicial,
-    p.rankingFinal,
     p.ganador,
     p.id,
     p.estado,
@@ -98,14 +90,6 @@ function toJSON(torneo: Torneo) {
       "jugadores": Array.from(torneo.jugadores).map(jugador => ({
         id: jugador.id,
         nombre: jugador.nombre
-      })),
-      "rankingInicial": Array.from(torneo.rankingInicial.entries()).map(([key, jugador]) => ({
-        id: key,
-        jugador: { id: jugador.id, nombre: jugador.nombre }
-      })),
-      "rankingFinal": Array.from(torneo.rankingFinal.entries()).map(([key, jugador]) => ({
-        id: key,
-        jugador: { id: jugador.id, nombre: jugador.nombre }
       })),
       "ganador": torneo.ganador ? { id: torneo.ganador.id, nombre: torneo.ganador.nombre } : null,
       "estado": torneo.estado ?? 'pendiente',
