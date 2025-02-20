@@ -30,6 +30,17 @@ body {
   background-repeat: repeat;
 }
 
+.fondo-sombreado {
+  background-color: black;
+  height: 100vh;
+  left: 0;
+  opacity: 0.33;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 500;
+}
+
 .ventana-popup {
   left: 50vw;
   position: fixed;
@@ -208,6 +219,7 @@ body {
 }
 
 .imagen-izquierda {
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
 }

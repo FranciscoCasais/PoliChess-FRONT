@@ -136,6 +136,7 @@ header {
 }
 
 .icono-login {
+  border-radius: 50%;
   height: 40px;
 }
 

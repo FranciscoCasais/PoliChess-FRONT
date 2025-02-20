@@ -4,13 +4,22 @@
       <span>&#8592; Atrás</span>
     </div>
     
-    <img class="imagen-izquierda" alt="Imagen de perfil" src="http://localhost:3000/polichess/imagenes/fotocvlinkedin.png">
-    <div class="contenedor-titulo contenedor-nombre-apellido">
+    <img class="imagen-izquierda" *ngIf="!previewUrl" alt="Imagen de perfil" [src]="'http://localhost:3000' + authService.getUsuario()?.foto_perfil">
+    <img class="imagen-izquierda" id="vista-previa" *ngIf="previewUrl" [src]="previewUrl" alt="Vista previa de la imagen">
+    <div *ngIf="!editar" class="contenedor-titulo contenedor-nombre-apellido">
       <h2 class="titulo">{{ authService.getUsuario()!.nombre }} {{ authService.getUsuario().apellido }}</h2>
       <img alt="Icono admin" src="admin.png" *ngIf="loginService.isAdmin()">
     </div>
+
+    <div *ngIf="editar" class="contenedor-titulo contenedor-nombre-apellido">
+      <label id="cambiar-imagen" for="fileInput" class="custom-file-upload">Cambiar foto de perfil</label>
+      <a *ngIf="previewUrl">
+        <img id="borrar-seleccion" alt="Borrar selección" src="borrar.png" *ngIf="previewUrl" (click)="borrarImagen()">
+      </a>
+      <input id="fileInput" type="file" (change)="onFileSelected($event)" accept="image/*" hidden>
+    </div>
     
-    <h3 class="nombre-usuario">&#64;{{ authService.getUsuario()!.nombre_usuario }}</h3>
+    <h3 *ngIf="!editar" class="nombre-usuario">&#64;{{ authService.getUsuario()!.nombre_usuario }}</h3>
     <div *ngIf="!editar && !eliminar" class="contenedor-botones">
       <button class="editar" (click)="toggleEditar()">Editar perfil</button>
       <button class="eliminar" (click)="toggleEliminar()">Eliminar perfil</button>
@@ -47,7 +56,7 @@
     
     <div id="contenedor-botones" class="contenedor-botones-en-linea">
       <button class="ver-mas" type="submit" style="box-shadow: none;">Guardar cambios</button>
-      <button class="ver-mas" type="button" (click)="toggleEditar()" style="box-shadow: none;">Cancelar</button>
+      <button class="ver-mas" type="button" (click)="toggleEditar(); borrarImagen()" style="box-shadow: none;">Cancelar</button>
     </div>
     
   </form>
@@ -97,6 +106,4 @@
   </form>
 </div>
 
-<label for="fileInput" class="custom-file-upload">Seleccionar Imagen</label>
-<input id="fileInput" type="file" (change)="onFileSelected($event)" accept="image/*" hidden>
-<img *ngIf="previewUrl" [src]="previewUrl" alt="Vista previa de la imagen" style="max-width: 300px; margin-top: 10px;">
+<div *ngIf="confirmarEdicion" class="fondo-sombreado"></div>

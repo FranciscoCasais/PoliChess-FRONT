@@ -1,9 +1,9 @@
 import { Location, NgIf, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LimitLineBreak } from '../directives/limit-line-break.directive';
-import { LoginService } from '../services/login/login.service';
-import { TorneoService } from '../services/torneo/torneo.service';
+import { LimitLineBreak } from '../../directives/limit-line-break.directive';
+import { LoginService } from '../../services/login/login.service';
+import { TorneoService } from '../../services/torneo/torneo.service';
 
 @Component({
   selector: 'app-crear-torneo',

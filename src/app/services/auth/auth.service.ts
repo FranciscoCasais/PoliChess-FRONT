@@ -6,8 +6,8 @@ import { LOCAL_STORAGE } from '../../local-storage.token';
 })
 export class AuthService {
   constructor(@Inject(LOCAL_STORAGE) private localStorage: Storage | null) {
-    if (!!localStorage) {
-      const usuarioGuardado: any = localStorage.getItem('usuario');
+    if (!!this.localStorage) {
+      const usuarioGuardado: any = this.localStorage.getItem('usuario');
 
       if (usuarioGuardado) {
         this.setUsuario(JSON.parse(usuarioGuardado));
@@ -17,7 +17,7 @@ export class AuthService {
 
   setUsuario(usuario: any) {
     if (!!this.localStorage) {
-      localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+      this.localStorage.setItem("usuarioActual", JSON.stringify(usuario));
     }
   }
 
@@ -30,7 +30,7 @@ export class AuthService {
 
   logout() {
     if (!!this.localStorage) {
-      localStorage.removeItem("usuarioActual");
+      this.localStorage.removeItem("usuarioActual");
     }
   }
 }

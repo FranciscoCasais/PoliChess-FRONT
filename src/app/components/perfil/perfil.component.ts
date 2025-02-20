@@ -1,9 +1,10 @@
 import { CommonModule, Location, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth/auth.service';
-import { LoginService } from '../services/login/login.service';
-import { UsuarioService } from '../services/usuario/usuario.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { LoginService } from '../../services/login/login.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';
+import { ImagenService } from '../../services/imagen/imagen.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
@@ -29,16 +30,19 @@ export class PerfilComponent {
 
   public cursorEncimaCerrar: boolean = false;
 
+  public foto_perfil: string = '';
   public nombre: string = '';
   public apellido: string = '';
   public nombre_usuario: string = '';
   public fecha_nacimiento: string = '';
 
-  constructor(public authService: AuthService, public loginService: LoginService, public location: Location, public usuarioService: UsuarioService) { }
+  constructor(public authService: AuthService, public loginService: LoginService, public location: Location,
+    public usuarioService: UsuarioService, public imagenService: ImagenService) { }
 
   ngOnInit() {
     const usuario = this.authService.getUsuario();
     if (usuario) {
+      this.foto_perfil = `http://localhost:3000${this.authService.getUsuario()!.foto_perfil}`;
       this.nombre = usuario.nombre || '';
       this.apellido = usuario.apellido || '';
       this.nombre_usuario = usuario.nombre_usuario || '';
@@ -109,6 +113,12 @@ export class PerfilComponent {
     }
   }
 
+  public borrarImagen(): void {
+    (document.getElementById("fileInput") as HTMLInputElement).value = "";
+    this.previewUrl = null;
+    this.selectedFile = null;
+  }
+
   public async editarPerfil() {
     if (!this.nombre.trim() || !this.apellido.trim() || !this.nombre_usuario.trim()) {
       alert("Todos los campos son obligatorios.");
@@ -121,7 +131,9 @@ export class PerfilComponent {
       return;
     }
 
-    console.log(this.fecha_nacimiento);
+    if (this.selectedFile) {
+      this.imagenService.subirImagen(this.selectedFile);
+    }
 
     let nuevaContrasena: string | null = (document.getElementById("nueva-contrasena") as HTMLInputElement).value || null;
     const usuarioEditado = {
@@ -132,8 +144,6 @@ export class PerfilComponent {
       contrasena_hash: nuevaContrasena ? nuevaContrasena : undefined,
       fecha_nacimiento: this.fecha_nacimiento ? this.fecha_nacimiento.replace(/\//g, "-") : null
     };
-
-    console.log(usuarioEditado);
 
     this.usuarioService.editar(usuarioEditado).subscribe({
       next: () => {
