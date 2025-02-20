@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { CrearTorneoComponent } from './components/crear-torneo/crear-torneo.component';
+import { CrearNoticiaComponent } from './components/crear-noticia/crear-noticia.component';
 import { NoticiasComponent } from './components/noticias/noticias.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { AdminGuard } from './guards/admin/admin.guard';
@@ -24,6 +25,11 @@ export const routes: Routes = [
   {
     path: "creartorneo",
     component: CrearTorneoComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
+  {
+    path: "crearnoticia",
+    component: CrearNoticiaComponent,
     canActivate: [AuthGuard, AdminGuard]
   },
   {

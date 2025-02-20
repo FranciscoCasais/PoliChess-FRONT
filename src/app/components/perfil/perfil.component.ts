@@ -132,7 +132,7 @@ export class PerfilComponent {
     }
 
     if (this.selectedFile) {
-      this.imagenService.subirImagen(this.selectedFile);
+      this.imagenService.subirImagenPerfil(this.selectedFile);
     }
 
     let nuevaContrasena: string | null = (document.getElementById("nueva-contrasena") as HTMLInputElement).value || null;

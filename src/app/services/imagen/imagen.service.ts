@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { lastValueFrom } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { UsuarioService } from '../usuario/usuario.service';
 
@@ -12,7 +12,7 @@ export class ImagenService {
 
   constructor(private http: HttpClient, private authService: AuthService, private usuarioService: UsuarioService) { }
 
-  public subirImagen(selectedFile: File): void {
+  public subirImagenPerfil(selectedFile: File): void {
     if (!selectedFile) {
       alert("No se ha seleccionado ningún archivo.");
       return;
@@ -50,6 +50,31 @@ export class ImagenService {
         console.error(err);
       }
     });
+  }
+
+  public async subirImagenNoticia(selectedFile: File | null): Promise<string | null> {
+    if (!selectedFile) {
+      alert("No se ha seleccionado ningún archivo.");
+      return null;
+    }
+
+    if (!selectedFile) {
+      alert("No se ha seleccionado ningún archivo.");
+      return null;
+    }
+  
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+  
+    try {
+      const res = await lastValueFrom(this.http.post<{ path: string }>(this.BASE_URL, formData));
+      alert("Imagen subida correctamente.");
+      return res.path;
+    } catch (err) {
+      alert("Ocurrió un error al subir la imagen.");
+      console.error(err);
+      return null;
+    }
   }
 
 }

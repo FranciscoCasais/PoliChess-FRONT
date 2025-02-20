@@ -22,7 +22,7 @@
     <h3 *ngIf="!editar" class="nombre-usuario">&#64;{{ authService.getUsuario()!.nombre_usuario }}</h3>
     <div *ngIf="!editar && !eliminar" class="contenedor-botones">
       <button class="editar" (click)="toggleEditar()">Editar perfil</button>
-      <button class="eliminar" (click)="toggleEliminar()">Eliminar perfil</button>
+      <button *ngIf="!loginService.isAdmin()" class="eliminar" (click)="toggleEliminar()">Eliminar perfil</button>
     </div>
   </div>
   <div *ngIf="!editar" class="contenedor-estadisticas contenedor-estadisticas-padding">
