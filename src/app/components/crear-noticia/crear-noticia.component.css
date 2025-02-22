@@ -1,3 +1,13 @@
+.contenedor-imagen-izquierda {
+  width: 40%;
+}
+
+.imagen-izquierda {
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--azul-poli);
+  border-radius: 7.5px;
+}
+
 .contenedor-titulo label {
   text-align: center;
 }

@@ -22,8 +22,8 @@
       <a [routerLink]="['']">CALENDARIO</a>
     </div>
 
-    <div class="contenedor-login" *ngIf="!this.loginService.isAuthenticated()">
-      <a (click)="toggleVentanaLoginRegistro(false)" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
+    <div class="contenedor-login">
+      <a *ngIf="!loginService.isAuthenticated()" (click)="toggleVentanaLoginRegistro(false)" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
         <div class="contenedor-icono-login">
           <img alt="Icono predeterminado" class="icono-login" src="iconologin.png" *ngIf="!cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
           <img alt="Icono predeterminado seleccionado" class="icono-login" src="iconologinhover.png" *ngIf="cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
@@ -31,15 +31,13 @@
 
         <span id="texto-login" *ngIf="!navbarAchicado">Iniciar sesión</span>
       </a>
-    </div>
 
-    <div class="contenedor-login" *ngIf="this.loginService.isAuthenticated()">
-      <a (click)="togglePerfil()" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
+      <a *ngIf="loginService.isAuthenticated()" (click)="togglePerfil()" (mouseenter)="cursorEncimaLogin = true" (mouseleave)="cursorEncimaLogin = false">
         <div class="contenedor-icono-login">
-          <img alt="Icono predeterminado" class="icono-login" src="iconologin.png" *ngIf="!cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
-          <img alt="Icono predeterminado seleccionado" class="icono-login" src="iconologinhover.png" *ngIf="cursorEncimaLogin" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
+          <img alt="Foto de perfil default" class="icono-login" src="iconologin.png" *ngIf="!cursorEncimaLogin && authService.getUsuario()?.foto_perfil === '/polichess/imagenes/fotoperfildefault.png'" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
+          <img alt="Foto de perfil seleccionada" class="icono-login" src="iconologinhover.png" *ngIf="cursorEncimaLogin && authService.getUsuario()?.foto_perfil === '/polichess/imagenes/fotoperfildefault.png'" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
+          <img alt="Foto de perfil" class="icono-login" [src]="'http://localhost:3000'+authService.getUsuario()?.foto_perfil" *ngIf="authService.getUsuario()?.foto_perfil !== '/polichess/imagenes/fotoperfildefault.png'" [ngClass]="navbarAchicado ? 'achicado' : 'no-achicado'">
         </div>
-
         <span id="texto-login" *ngIf="!navbarAchicado">Mi perfil</span>
       </a>
     </div>

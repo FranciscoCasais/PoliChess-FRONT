@@ -22,7 +22,7 @@
     <h3 *ngIf="!editar" class="nombre-usuario">&#64;{{ authService.getUsuario()!.nombre_usuario }}</h3>
     <div *ngIf="!editar && !eliminar" class="contenedor-botones">
       <button class="editar" (click)="toggleEditar()">Editar perfil</button>
-      <button *ngIf="!loginService.isAdmin()" class="eliminar" (click)="toggleEliminar()">Eliminar perfil</button>
+      <button class="eliminar" (click)="toggleEliminar()">Eliminar perfil</button>
     </div>
   </div>
   <div *ngIf="!editar" class="contenedor-estadisticas contenedor-estadisticas-padding">
@@ -48,7 +48,7 @@
     <label for="nombre_usuario">Nombre de usuario: </label>
     <input type="text" name="nombre_usuario" [(ngModel)]="nombre_usuario" required>
 
-    <label for="fecha_nacimiento">Fecha de nacimiento (año-mes-día):</label>
+    <label for="fecha_nacimiento">Fecha de nacimiento (día-mes-año):</label>
     <input type="date" name="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" required>
     
     <label for="contrasena_hash">Nueva contraseña (dejar vacío para mantener actual): </label>
@@ -77,7 +77,7 @@
   <div class="ventana-popup-seccion-inferior">
     <p>¿Seguro que querés eliminar tu perfil?</p>
     <div class="contenedor-botones-en-linea">
-      <button id="boton-eliminar" class="boton-rojo" (click)="eliminarPerfil()">ELIMINAR</button>
+      <button id="boton-eliminar" class="boton-rojo" (click)="toggleConfirmarEdicion()">ELIMINAR</button>
       <button id="boton-cancelar" class="boton-normal" (click)="toggleEliminar()">Cancelar</button>
     </div>
   </div>
@@ -86,7 +86,8 @@
 <div class="ventana-popup" *ngIf="confirmarEdicion">
   <div class="ventana-popup-seccion-superior">
     <div class="contenedor-titulo-popup">
-      <h3>Confirmar edición</h3>
+      <h3 *ngIf="editar">Confirmar edición</h3>
+      <h3 *ngIf="eliminar">Confirmar eliminación</h3>
     </div>
     <div class="contenedor-cerrar">
       <a (mouseenter)="cursorEncimaCerrar = true" (mouseleave)="cursorEncimaCerrar = false" (click)="toggleConfirmarEdicion()">
@@ -96,14 +97,15 @@
     </div>
   </div>
   <form class="ventana-popup-seccion-inferior">
-    <p>Por favor ingresá tu contraseña para confirmar los cambios:</p>
+    <p *ngIf="editar" style="text-align: center;">Por favor ingresá tu contraseña actual para confirmar los cambios:</p>
+    <p *ngIf="eliminar">Por favor ingresá tu contraseña para confirmar:</p>
     <input id="contrasena" type="password" name="contrasena" required>
     
     <div class="contenedor-botones-en-linea">
       <button id="boton-eliminar" class="boton-normal" (click)="compararContrasenas()">Confirmar</button>
-      <button id="boton-cancelar" class="boton-normal" (click)="toggleConfirmarEdicion()">Cancelar</button>
+      <button id="boton-cancelar" class="boton-normal" (click)="toggleConfirmarEdicion(); toggleEliminar();">Cancelar</button>
     </div>
   </form>
 </div>
 
-<div *ngIf="confirmarEdicion" class="fondo-sombreado"></div>
+<div *ngIf="confirmarEdicion || eliminar" class="fondo-sombreado"></div>

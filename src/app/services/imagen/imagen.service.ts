@@ -29,9 +29,7 @@ export class ImagenService {
           next: (res: any) => {
             this.usuarioService.obtenerUno(this.authService.getUsuario().id).subscribe({
               next: (res: any) => {
-                console.log(res);
                 this.authService.setUsuario(res);
-                alert("hola");
               },
               error: (err: any) => {
                 alert("Ocurrió un error al obtener el usuario.");

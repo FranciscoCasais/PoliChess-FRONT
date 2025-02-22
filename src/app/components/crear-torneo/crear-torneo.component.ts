@@ -157,8 +157,6 @@ export class CrearTorneoComponent {
       ritmo: (document.getElementById('ritmo') as HTMLInputElement).value,
     }
 
-    console.log(torneo);
-
     this.torneoService.agregar(torneo).subscribe({
       next: (res: any) => {
         alert('Torneo creado exitosamente');

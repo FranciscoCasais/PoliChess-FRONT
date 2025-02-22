@@ -44,15 +44,14 @@ export class CrearNoticiaComponent {
     this.selectedFile = null;
   }
 
-  public async crearNoticia() {
-    let res;
+  public async crearNoticia(e: Event) {
+    e.preventDefault();
+    let res: string | null = null;
 
     if (this.selectedFile) {
       res = await this.imagenService.subirImagenNoticia(this.selectedFile);
 
-      console.log(res);
       if (!res) {
-        alert("Ocurrió un error al subir la imagen.");
         return;
       }
     }
@@ -63,10 +62,18 @@ export class CrearNoticiaComponent {
     const autor_id: number = this.authService.getUsuario().id;
     const cuerpo: string = (document.getElementById("cuerpo") as HTMLInputElement).value;
 
-    this.noticiaService.agregar({ titulo, copete, imagen, autor_id, cuerpo }).subscribe({
+    const noticia = {
+      titulo: titulo,
+      copete: copete,
+      imagen: imagen,
+      autor_id: autor_id,
+      cuerpo: cuerpo
+    }
+
+    this.noticiaService.agregar(noticia).subscribe({
       next: () => {
         alert("Noticia creada correctamente.");
-        this.location.back();
+        this.volver();
       },
       error: (err: any) => {
         alert("Ocurrió un error al crear la noticia.");

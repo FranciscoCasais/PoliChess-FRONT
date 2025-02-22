@@ -71,8 +71,12 @@ export class PerfilComponent {
 
     this.loginService.login(this.authService.getUsuario()!.nombre_usuario, contrasena).subscribe({
       next: () => {
+        if (this.editar) {
+          this.editarPerfil();
+        } else if (this.eliminar) {
+          this.eliminarPerfil();
+        }
         this.toggleConfirmarEdicion();
-        this.editarPerfil();
       },
       error: () => {
         alert("La contraseña ingresada es incorrecta.");
@@ -152,8 +156,6 @@ export class PerfilComponent {
         this.usuarioService.obtenerUno(decoded.id).subscribe({
           next: (data: any) => {
             this.authService.setUsuario(data);
-            console.log(data);
-            alert("hola");
             window.location.reload();
           },
           error: (err) => {

@@ -174,7 +174,7 @@ export class AppComponent {
         // document.body.style.overflowY = 'auto';
       },
       error: (err) => {
-        console.log(err);
+        console.error(err);
         if (err.status === 409) {
           alert("El nombre de usuario ya está en uso");
         } else {
