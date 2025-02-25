@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class NoticiaService {
   }
 
   public obtenerAlgunos(pagina: number) {
-    return this.http.get(`${this.BASE_URL}/${pagina}`)
+    return this.http.get(`${this.BASE_URL}/pagina/${pagina}`)
   }
 
   public obtenerAlgunosPorBusqueda(busqueda: string, pagina: number) {

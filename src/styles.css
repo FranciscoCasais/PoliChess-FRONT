@@ -3,6 +3,7 @@
   --azul-poli: #155A9E;
   --azul-poli-hover: #114a83;
   --nombre-usuario: rgb(94, 94, 94);
+  --texto-suave: rgb(150, 150, 150);
   --fuente-titulos: "LM Roman Caps 10";
   --fuente-titulos-2: Arial;
   --fuente-subtitulos: "Roboto Slab";
@@ -360,6 +361,101 @@ body {
   display: flex;
   flex-direction: column;
   width: 50%;
+}
+
+.contenedor-busqueda, .contenedor-paginacion {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 25px;
+  width: calc(100% - 50px);
+}
+
+.contenedor-busqueda label {
+  font-family: var(--fuente-texto);
+  font-size: 20px;
+}
+
+.contenedor-busqueda input {
+  border: 1px solid var(--azul-poli);
+  font-family: var(--fuente-texto);
+  font-size: 100%;
+  height: 20px;
+  padding: 15px 40px 15px 15px;
+  width: 33.33%;
+}
+
+.contenedor-busqueda span {
+  position: relative;
+  font-size: 30px;
+  font-weight: normal;
+  right: 58px;
+}
+
+.contenedor-busqueda span:hover {
+  cursor: pointer;
+}
+
+.contenedor-busqueda input:focus {
+  outline: none;
+}
+
+.contenedor-paginacion {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 54px;
+}
+
+.contenedor-paginacion span {
+  font-family: var(--fuente-texto);
+  font-size: 20px;
+  text-align: center;
+}
+
+.contenedor-flechas {
+  display: flex;
+  gap: 10px;
+}
+
+.contenedor-flechas-izquierda {
+  justify-content: end;
+}
+
+.contenedor-flechas-derecha {
+  justify-content: start;
+}
+
+.contenedor-flechas button {
+  background-color: var(--azul-poli);
+  border-radius: 7.5px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.contenedor-flechas button:hover {
+  background-color: var(--azul-poli-hover);
+  color: var(--amarillo-poli);
+}
+
+.contenedor-flechas button:disabled {
+  background-color: rgb(80, 111, 141);
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.contenedor-flechas button:disabled:hover {
+  color: white;
+}
+
+.flecha-izquierda {
+  padding: 5px 13px 7px 9px;
+}
+
+.flecha-derecha {
+  padding: 5px 10px 7px 12px;
 }
 
 @media(max-height: 768px) {
