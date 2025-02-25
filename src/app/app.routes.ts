@@ -7,6 +7,7 @@ import { NoticiasComponent } from './components/noticias/noticias.component';
 import { NoticiaComponent } from './components/noticia/noticia.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { AdminGuard } from './guards/admin/admin.guard';
+import { jugadoresComponent } from './components/jugadores/jugadores.component';
 
 export const routes: Routes = [
   {
@@ -40,5 +41,9 @@ export const routes: Routes = [
     path: "crearnoticia",
     component: CrearNoticiaComponent,
     canActivate: [AuthGuard, AdminGuard]
+  },
+  {
+    path: "jugadores",
+    component: jugadoresComponent,
   }
 ];
