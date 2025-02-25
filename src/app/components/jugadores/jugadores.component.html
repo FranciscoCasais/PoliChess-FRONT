@@ -1,47 +1,31 @@
-<section id="inicio">
-    <main id="contenedor-principal">
-      <section id="jugadores">
-        <!-- Buscador por nombre -->
-        <div class="buscador">
-          <label for="buscarJugador">Buscar Jugador por Nombre:</label>
-          <input type="text" id="buscarJugador" [(ngModel)]="busquedaNombre" (input)="filtrarPorNombre()" placeholder="Nombre...">
-        </div>
-        <!-- Filtros de Elo -->
-        <div class="filtros">
-          <label for="filtroElo">Filtrar por Elo:</label>
-          <select id="filtroElo" (change)="filtrarJugadores($event)">
-            <option value="standard">Elo Standard</option>
-            <option value="rapido">Elo Rápido</option>
-            <option value="blitz">Elo Blitz</option>
-          </select>
-        </div>
-  
-   <!-- Iterar sobre la lista de jugadores con *ngFor -->
-  <div *ngFor="let jugador of jugadoresPaginados; let i = index" class="jugador-card">
-    <a [routerLink]="['/jugador', jugador.id]" class="jugador-link">
-      <div class="jugador-info">
-        <!-- Número del ranking con clases dinámicas -->
-        <div class="ranking-numero" [ngClass]="getPodioClase(i)">
-          {{ (currentPage - 1) * pageSize + i + 1 }}.
-        </div>
-        <img [src]="jugador.foto" alt="Foto de {{ jugador.nombre }}" class="jugador-imagen">
-        <div class="jugador-detalles">
-          <h3>{{ jugador.nombre }} {{ jugador.apellido }}</h3>
-          <h4>Elo Standard: {{ jugador.eloStandard }}</h4>
-          <h4>Elo Rapido: {{ jugador.eloRapido }}</h4>
-          <h4>Elo Blitz: {{ jugador.eloBlitz }}</h4>
-        </div>
-      </div>
-    </a>
+<div id="contenedor-superior">
+  <div class="recuadro-blanco contenedor-busqueda">
+    <label for="buscar-jugador">Buscar jugador: </label>
+    <input id="buscarjugador" type="text" placeholder="Nombre del jugador..." (input)="buscarJugadores()">
+    <span *ngIf="busqueda !== ''" (click)="limpiarBusqueda()">&times;</span>
   </div>
+  <div *ngIf="loginService.isAdmin()" id="crear-jugador" class="recuadro-blanco">
+    <img src="admin.png" alt="Icono admin">
+    <button [routerLink]="['/crearjugador']">Crear jugador</button>
+  </div>
+</div>
+
   
-        <!-- Paginación -->
-        <div class="paginacion">
-          <button (click)="cambiarPagina(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
-          <span>Página {{ currentPage }} de {{ numeroDePaginas }}</span>
-          <button (click)="cambiarPagina(currentPage + 1)" [disabled]="currentPage === numeroDePaginas">Siguiente</button>
-        </div>
-      </section>
-    </main>
-  </section>
   
+  
+        <section id="jugadores" class="recuadro-blanco" [ngClass]="jugadores.length > 0 ? 'cuadricula' : 'mensaje-centrado'">
+          <app-carta-jugador *ngFor="let jugador of jugadores" [jugador]="jugador" [routerLink]="[jugador.id]"></app-carta-jugador>
+          <h3 *ngIf="jugadores.length === 0">No se encontraron coincidencias</h3>
+        </section>
+
+  <div class="recuadro-blanco contenedor-paginacion">
+    <div class="contenedor-flechas contenedor-flechas-izquierda">
+      <button class="flecha-izquierda" (click)="primeraPagina()" [disabled]="paginaActual === 1">&#9664;&#9664;</button>
+      <button class="flecha-izquierda" (click)="paginaAnterior()" [disabled]="paginaActual === 1">&#9664;</button>
+    </div>
+    <span>Página {{ paginas > 0 ? paginaActual : 0 }} de {{ paginas }}</span>
+    <div class="contenedor-flechas contenedor-flechas-derecha">
+      <button class="flecha-derecha" (click)="paginaSiguiente()" [disabled]="paginaActual === paginas || paginas === 0">&#9654;</button>
+      <button class="flecha-derecha" (click)="ultimaPagina()" [disabled]="paginaActual === paginas || paginas === 0">&#9654;&#9654;</button>
+    </div>
+  </div>

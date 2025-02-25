@@ -1,201 +1,62 @@
-  /* Estilos generales */
-  #inicio {
-    padding: 10vh 10vw;
-    background: linear-gradient(to bottom, #f0f0f0, #ffffff);
-    min-height: 100vh;
-  }
-
-  #jugadores {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
-
-  /* Estilo para el filtro de nombre (buscador) */
-  .buscador {
-    margin-bottom: 20px;
-    text-align: center;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .buscador label {
-    font-size: 1.2rem;
-    margin-right: 15px;
-    color: #333;
-  }
-
-  .buscador input {
-    padding: 8px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    background-color: #fff;
-    width: 100%;
-    max-width: 300px;
-    margin-top: 10px;
-    transition: border-color 0.3s ease;
-  }
-
-  .buscador input:focus {
-    outline: none;
-    border-color: #4CAF50;
-  }
-
-  /* Estilos para las tarjetas de jugador */
-  .jugador-card {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .jugador-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  }
-
-  .jugador-info {
-    display: flex;
-    align-items: center;  
-  }
-
-  .jugador-imagen {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 20px;
-    object-fit: cover;
-  }
-
-  .jugador-detalles {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .jugador-detalles h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #333;
-    font-weight: bold;
-  }
-
-  .jugador-detalles h4 {
-    margin: 5px 0;
-    font-size: 1rem;
-    color: #555;
-    font-weight: normal;
-  }
-
-  /* Filtro */
-  .filtros {
-    margin-bottom: 30px;
-    text-align: center;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .filtros label {
-    font-size: 1.2rem;
-    margin-right: 15px;
-    color: #333;
-  }
-
-  .filtros select {
-    padding: 8px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
-  }
-
-  .filtros select:focus {
-    outline: none;
-    border-color: #4CAF50;
-  }
-
-  /* Estilo para los enlaces (sin efecto de hipervinculo) */
-  .jugador-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-
-  /* Número de ranking */
-.ranking-numero {
-  font-size: 1.75rem;
-  font-weight: bold;
-  margin-right: 15px;
-  color: #333;
+#contenedor-superior {
+  display: flex;
+  gap: 25px;
 }
 
-/* Colores para el podio */
-.ranking-numero.podio-oro {
-  color: #ffd900; /* Dorado */
-  font-size: 3.25rem;
+#crear-noticia {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding: 25px;
+  white-space: nowrap;
+  width: max-content;
 }
 
-.ranking-numero.podio-plata {
-  color: #C0C0C0; /* Plateado */
-  font-size: 2.6rem;
+#crear-noticia img {
+  height: 40px;
+  width: auto;
 }
 
-.ranking-numero.podio-bronce {
-  color: #CD7F32; /* Bronce */
-  font-size: 2rem;
+#crear-noticia button {
+  background-color: var(--azul-poli);
+  border-radius: 7.5px;
+  color: white;
+  font-family: var(--fuente-botones);
+  font-size: 20px;
+  padding: 12.5px 15px;
 }
 
-/* Estilos para los controles de paginación */
-.paginacion {
+#crear-noticia button:hover {
+  background-color: var(--azul-poli-hover);
+  color: var(--amarillo-poli);
+  cursor: pointer;
+}
+
+.recuadro-blanco {
+  margin-bottom: 25px;
+}
+
+.cuadricula {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mensaje-centrado {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center; /* Alineación vertical */
-  margin-top: 20px;
 }
 
-/* Alineación del texto "Página X de X" */
-.paginacion .pagina-texto {
-  margin: 0 15px; /* Espaciado entre los botones y el texto */
-  font-size: 1rem;
-  color: #333;
+.mensaje-centrado h3 {
+  color: var(--texto-suave);
+  font-family: var(--fuente-subtitulos);
+  font-size: 25px;
+  font-weight: normal;
+  text-align: center;
 }
 
-/* Estilos de los botones de paginación */
-.paginacion button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  background-color: #888; /* Gris base */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+#noticias, .contenedor-paginacion {
+  margin-top: 0;
 }
-
-.paginacion button:disabled {
-  background-color: #d1d1d1; /* Gris más claro para el botón deshabilitado */
-  cursor: not-allowed;
-}
-
-.paginacion button:hover {
-  background-color: #666; /* Gris más oscuro al pasar el ratón */
-}
-
-
-

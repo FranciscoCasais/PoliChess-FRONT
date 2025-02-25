@@ -1,7 +1,7 @@
 import { NgIf, NgFor, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CartaNoticiaComponent } from '../carta-noticia/carta-noticia.component';
+import { CartaJugadorComponent } from '../carta-jugador/carta-jugador.component';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { LoginService } from '../../services/login/login.service';
 
@@ -11,7 +11,7 @@ import { LoginService } from '../../services/login/login.service';
   imports: [ NgIf,
     NgFor,
     NgClass,
-    CartaNoticiaComponent,
+    CartaJugadorComponent,
     RouterLink], 
   templateUrl: 'jugadores.component.html',
   styleUrls: ['jugadores.component.css']
