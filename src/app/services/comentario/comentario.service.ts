@@ -5,12 +5,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ComentarioService {
-  private BASE_URL: string = "http://localhost:3000/"
+  private BASE_URL: string = "http://localhost:3000/polichess";
 
   constructor(private http: HttpClient) { }
 
   public obtenerUno(id: number) {
     return this.http.get(`${this.BASE_URL}/comentarios/${id}`)
+  }
+
+  public obtenerTotal(idNoticia: number) {
+    return this.http.get(`${this.BASE_URL}/noticias/${idNoticia}/comentarios`);
   }
 
   public obtenerAlgunosPorASC(idNoticia: number, pagina: number) {

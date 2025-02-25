@@ -58,7 +58,7 @@ export class CrearNoticiaComponent {
     
     const titulo: string = (document.getElementById("titulo") as HTMLInputElement).value;
     const copete: string = (document.getElementById("copete") as HTMLInputElement).value;
-    const imagen: string | null = res ? res : null;
+    const imagen: string | null = res ? res : "/polichess/imagenes/noticiadefault.jpg";
     const autor_id: number = this.authService.getUsuario().id;
     const cuerpo: string = (document.getElementById("cuerpo") as HTMLInputElement).value;
 

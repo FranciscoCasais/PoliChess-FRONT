@@ -458,6 +458,13 @@ body {
   padding: 5px 10px 7px 12px;
 }
 
+.input-predeterminado {
+  border: 1px solid var(--azul-poli);
+  font-family: var(--fuente-texto);
+  font-size: 100%;
+  padding: 15px;
+}
+
 @media(max-height: 768px) {
   .recuadro-no-scroll {
     height: 489px;

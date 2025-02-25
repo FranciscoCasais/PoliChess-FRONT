@@ -11,7 +11,7 @@
 </div>
 
 <section id="noticias" class="recuadro-blanco" [ngClass]="noticias.length > 0 ? 'cuadricula' : 'mensaje-centrado'">
-  <app-carta-noticia *ngFor="let noticia of noticias" [noticia]="noticia"></app-carta-noticia>
+  <app-carta-noticia *ngFor="let noticia of noticias" [noticia]="noticia" [routerLink]="[noticia.id]"></app-carta-noticia>
   <h3 *ngIf="noticias.length === 0">No se encontraron coincidencias</h3>
 </section>
 
