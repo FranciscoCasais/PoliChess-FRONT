@@ -110,12 +110,13 @@ export class NoticiaComponent {
   }
 
   public validarContenido(valor: string): void {
-    this.contenidoInvalido = /^[\s\n\r]*$/.test(valor);
+    this.contenidoInvalido = (valor === "" || /^[\s\n\r]*$/.test(valor));
   }
 
   public limpiarContenido(): void {
     const input: HTMLInputElement = document.getElementById("contenido") as HTMLInputElement;
     input.value = "";
     input.blur();
+    this.validarContenido(input.value);
   }
 }
