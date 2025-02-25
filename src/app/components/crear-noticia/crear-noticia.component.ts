@@ -8,7 +8,10 @@ import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-crear-noticia',
   standalone: true,
-  imports: [NgIf, LimitLineBreak],
+  imports: [
+    NgIf,
+    LimitLineBreak
+  ],
   templateUrl: './crear-noticia.component.html',
   styleUrl: './crear-noticia.component.css'
 })

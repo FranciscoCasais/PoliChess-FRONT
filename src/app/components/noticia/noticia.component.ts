@@ -6,11 +6,16 @@ import { UsuarioService } from '../../services/usuario/usuario.service';
 import { ComentarioService } from '../../services/comentario/comentario.service';
 import { LoginService } from '../../services/login/login.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { EventoLoginService } from '../../services/evento-login/evento-login.service';
+import { LimitLineBreak } from '../../directives/limit-line-break.directive';
 
 @Component({
   selector: 'app-noticia',
   standalone: true,
-  imports: [NgIf],
+  imports: [
+    NgIf,
+    LimitLineBreak
+  ],
   templateUrl: './noticia.component.html',
   styleUrl: './noticia.component.css'
 })
@@ -20,10 +25,13 @@ export class NoticiaComponent {
   public fechaPublicacion: string = "Desconocida";
   public fechaActualizacion: string = "Desconocida";
   public totalComentarios: number = 0;
+  public maxLineas: number = 15;
+  public contenidoInvalido: boolean = true;
 
   constructor(private location: Location, private route: ActivatedRoute, private noticiaService: NoticiaService,
     private usuarioService: UsuarioService, private comentarioService: ComentarioService, public loginService: LoginService,
-    public authService: AuthService) { }
+    public authService: AuthService, private eventoLoginService: EventoLoginService,
+    public limitLineBreak: LimitLineBreak) { }
 
   ngOnInit() {
     this.noticiaService.obtenerUno(Number(this.route.snapshot.paramMap.get('id'))).subscribe({
@@ -76,7 +84,38 @@ export class NoticiaComponent {
   }
 
   public toggleLogin(): void {
-    
+    this.eventoLoginService.emitirEvento("Toggle login");
   }
 
+  public comentar(): void {
+    const usuario_id: number | null = this.loginService.getUsuarioId();
+    const noticia_id: number = this.noticia.id;
+    const contenido: string = (document.getElementById("contenido") as HTMLInputElement).value;
+    const comentario: any = { usuario_id, noticia_id, contenido };
+
+    this.comentarioService.agregar(comentario).subscribe({
+      next: () => {
+        alert("Comentario agregado correctamente.");
+        this.volver();
+      },
+      error: (err: any) => {
+        alert("Ocurrió un error al crear el comentario.");
+        console.error(err);
+      }
+    });
+  }
+
+  public bloquearInput(e: Event): void {
+    e.preventDefault();
+  }
+
+  public validarContenido(valor: string): void {
+    this.contenidoInvalido = /^[\s\n\r]*$/.test(valor);
+  }
+
+  public limpiarContenido(): void {
+    const input: HTMLInputElement = document.getElementById("contenido") as HTMLInputElement;
+    input.value = "";
+    input.blur();
+  }
 }

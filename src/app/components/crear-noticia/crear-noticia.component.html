@@ -21,7 +21,7 @@
   <form class="contenedor-estadisticas contenedor-estadisticas-padding" (submit)="crearNoticia($event)">
     <input id="titulo" type="text" name="titulo" placeholder="Título" maxlength="150" required style="width: calc(100% - 30px);">
     <input id="copete" type="text" name="copete" placeholder="Copete" maxlength="255" required style="width: calc(100% - 30px);">
-    <textarea id="cuerpo" name="cuerpo" placeholder="Cuerpo" rows="10" maxlength="16383" required [limitLineBreak]="this.maxLineas" style="width: calc(100% - 30px);"></textarea>
+    <textarea id="cuerpo" name="cuerpo" placeholder="Cuerpo" rows="10" maxlength="16383" required [limitLineBreak]="maxLineas" style="width: calc(100% - 30px);"></textarea>
   
     <div id="contenedor-crear">
       <button id="crear-noticia" type="submit" class="ver-mas">CREAR NOTICIA</button>

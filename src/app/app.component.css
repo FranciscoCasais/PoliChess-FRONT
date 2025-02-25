@@ -10,7 +10,7 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 500;
 }
 
 #contenedor-tres-lineas {
@@ -198,7 +198,7 @@ header {
 
 #contenedor-cerrar a {
   border-radius: 7.5px;
-  padding: 10px 10px 7.5px 10px;
+  padding: 10px 10px 6px 10px;
 }
 
 #contenedor-cerrar a:hover {

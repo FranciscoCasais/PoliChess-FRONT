@@ -4,6 +4,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { UsuarioService } from './services/usuario/usuario.service';
 import { LoginService } from './services/login/login.service';
 import { AuthService } from './services/auth/auth.service';
+import { EventoLoginService } from './services/evento-login/evento-login.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
@@ -34,7 +35,8 @@ export class AppComponent {
   public ventanaLoginRegistro: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, public loginService: LoginService,
-    private usuarioService: UsuarioService, public authService: AuthService) {
+    private usuarioService: UsuarioService, public authService: AuthService,
+    private eventoLoginService: EventoLoginService) {
     this.navbarAchicado = false;
   }
 
@@ -42,6 +44,12 @@ export class AppComponent {
     if(isPlatformBrowser(this.platformId)) {
       this.onWindowScroll();
     }
+
+    this.eventoLoginService.$evento.subscribe((mensaje: string) => {
+      if (mensaje === "Toggle login") {
+        this.ventanaLoginRegistro = true;
+      }
+    });
   }
 
   public togglePerfil(): void {

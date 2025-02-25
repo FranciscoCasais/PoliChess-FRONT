@@ -1,8 +1,11 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Injectable, Input } from '@angular/core';
 
 @Directive({
   selector: '[limitLineBreak]',
   standalone: true
+})
+@Injectable({
+  providedIn: "root"
 })
 export class LimitLineBreak {
   @Input('limitLineBreak') maxLineas: number = 10;

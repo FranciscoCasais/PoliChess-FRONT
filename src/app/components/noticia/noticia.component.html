@@ -29,12 +29,12 @@
   
   <div id="agregar-comentario">
     <img *ngIf="!loginService.isAuthenticated()" [src]="'http://localhost:3000/polichess/imagenes/fotoperfildefault.png'" alt="Foto de perfil predeterminada">
-    <textarea class="input-predeterminado" *ngIf="!loginService.isAuthenticated()" placeholder="Agregá un comentario..." (focus)="toggleLogin()"></textarea>
+    <textarea class="input-predeterminado" *ngIf="!loginService.isAuthenticated()" placeholder="Agregá un comentario..." (click)="toggleLogin()" (keydown)="bloquearInput($event)" (dragover)="bloquearInput($event)" (drop)="bloquearInput($event)"></textarea>
     <img *ngIf="loginService.isAuthenticated()" [src]="'http://localhost:3000'+authService.getUsuario().foto_perfil" alt="Foto de perfil del usuario">
-    <textarea class="input-predeterminado" *ngIf="loginService.isAuthenticated()" placeholder="Agregá un comentario..."></textarea>
+    <textarea id="contenido" #contenido class="input-predeterminado" *ngIf="loginService.isAuthenticated()" placeholder="Agregá un comentario..." (input)="validarContenido(contenido.value)" [limitLineBreak]="maxLineas"></textarea>
   </div>
   <div id="contenedor-acciones">
-    <button id="boton-comentar">Comentar</button>
-    <button id="boton-cancelar">Cancelar</button>
+    <button id="boton-comentar" (click)="comentar()" [disabled]="!loginService.isAuthenticated() || contenidoInvalido">Comentar</button>
+    <button id="boton-cancelar" (click)="limpiarContenido()" [disabled]="!loginService.isAuthenticated()">Cancelar</button>
   </div>
 </div>

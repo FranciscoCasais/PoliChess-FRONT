@@ -28,6 +28,7 @@ export class ComentarioService {
   public agregar(comentario: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
 
     const body = comentario;

@@ -137,9 +137,11 @@
 
 #contenedor-acciones {
   align-items: center;
+  border-bottom: 1px solid var(--texto-suave);
   display: flex;
   gap: 10px;
   justify-content: end;
+  padding-bottom: 25px;
 }
 
 #contenedor-acciones button {
@@ -148,6 +150,14 @@
   font-family: var(--fuente-botones);
   font-size: 15px;
   padding: 10px 12.5px;
+}
+
+#contenedor-acciones button:disabled {
+  background-color: var(--azul-poli-deshabilitado);
+  border-color: var(--azul-poli-deshabilitado);
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.75;
 }
 
 #boton-comentar {

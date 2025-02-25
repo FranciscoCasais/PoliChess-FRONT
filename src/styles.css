@@ -2,6 +2,7 @@
   --amarillo-poli: #FFCB00; 
   --azul-poli: #155A9E;
   --azul-poli-hover: #114a83;
+  --azul-poli-deshabilitado: rgb(80, 111, 141);
   --nombre-usuario: rgb(94, 94, 94);
   --texto-suave: rgb(150, 150, 150);
   --fuente-titulos: "LM Roman Caps 10";
@@ -81,7 +82,7 @@ body {
 
 .contenedor-cerrar a {
   border-radius: 7.5px;
-  padding: 10px 10px 7.5px 10px;
+  padding: 10px 10px 6px 10px;
 }
 
 .contenedor-cerrar a:hover {
@@ -441,7 +442,7 @@ body {
 }
 
 .contenedor-flechas button:disabled {
-  background-color: rgb(80, 111, 141);
+  background-color: var(--azul-poli-deshabilitado);
   cursor: not-allowed;
   opacity: 0.75;
 }
