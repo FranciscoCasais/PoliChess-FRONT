@@ -35,7 +35,7 @@
   </div>
   <div id="contenedor-acciones">
     <button id="boton-comentar" (click)="comentar()" [disabled]="!loginService.isAuthenticated() || contenidoInvalido">Comentar</button>
-    <button id="boton-cancelar" (click)="limpiarContenido()" [disabled]="!loginService.isAuthenticated()">Cancelar</button>
+    <button id="boton-cancelar" (click)="limpiarContenido()" [disabled]="!loginService.isAuthenticated() || contenidoInvalido">Cancelar</button>
   </div>
   
 </div>
