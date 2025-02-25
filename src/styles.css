@@ -382,7 +382,7 @@ body {
   font-family: var(--fuente-texto);
   font-size: 100%;
   height: 20px;
-  padding: 15px 40px 15px 15px;
+  padding: 15px 44px 15px 15px;
   width: 33.33%;
 }
 
@@ -390,7 +390,7 @@ body {
   position: relative;
   font-size: 30px;
   font-weight: normal;
-  right: 58px;
+  right: 54px;
 }
 
 .contenedor-busqueda span:hover {

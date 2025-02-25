@@ -29,6 +29,7 @@ export class NoticiasComponent {
 
   ngOnInit(): void {
     this.obtenerNoticias();
+    this.obtenerPaginas();
   }
 
   public obtenerNoticias(): void {
@@ -53,19 +54,19 @@ export class NoticiasComponent {
         }
       });
     }
-
-    this.obtenerPaginas();
   }
 
   public buscarNoticias(): void {
     this.busqueda = (document.getElementById("buscarNoticia") as HTMLInputElement).value;
     this.obtenerNoticias();
+    this.obtenerPaginas();
   }
 
   public limpiarBusqueda(): void {
     this.busqueda = "";
     (document.getElementById("buscarNoticia") as HTMLInputElement).value = "";
     this.obtenerNoticias();
+    this.obtenerPaginas();
   }
 
   public paginaAnterior(): void {
