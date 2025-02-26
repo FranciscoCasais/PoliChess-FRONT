@@ -283,7 +283,7 @@ body {
 
 .eliminar {
   background-color: transparent;
-  border: 2px solid red;
+  border: 1px solid red;
   color: red;
 }
 
@@ -464,6 +464,17 @@ body {
   font-family: var(--fuente-texto);
   font-size: 100%;
   padding: 15px;
+}
+
+.boton-cancelar {
+  background-color: white;
+  border: 1px solid var(--azul-poli);
+  color: var(--azul-poli);
+}
+
+.boton-cancelar:hover {
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
 }
 
 @media(max-height: 768px) {

@@ -137,8 +137,10 @@ header {
 }
 
 .icono-login {
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   height: 40px;
+  object-fit: cover;
 }
 
 .sombreado {

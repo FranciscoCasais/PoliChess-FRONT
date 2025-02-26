@@ -25,9 +25,10 @@
 }
 
 #enlace-autor img {
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   height: 50px;
-  width: auto;
+  object-fit: cover;
 }
 
 #enlace-autor img:hover {
@@ -119,9 +120,10 @@
 }
 
 #agregar-comentario img {
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   height: 75px;
-  width: auto;
+  object-fit: cover;
 }
 
 #agregar-comentario textarea {
@@ -171,13 +173,9 @@
   cursor: pointer;
 }
 
-#boton-cancelar {
-  background-color: white;
-  border: 1px solid var(--azul-poli);
-  color: var(--azul-poli);
-}
-
-#boton-cancelar:hover {
-  background-color: rgb(226, 226, 226);
-  cursor: pointer;
+#comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 25px;
 }

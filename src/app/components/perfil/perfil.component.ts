@@ -1,6 +1,6 @@
 import { CommonModule, Location, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { LoginService } from '../../services/login/login.service';
 import { UsuarioService } from '../../services/usuario/usuario.service';
@@ -53,6 +53,19 @@ export class PerfilComponent {
     }
   }
 
+  @HostListener('document:click', ['$event'])
+  public cerrarVentanaPopup(event: Event): void {
+    const ventanaPopupEliminar: HTMLElement = document.getElementById("ventana-popup-eliminar") as HTMLElement;
+    const ventanaPopupConfirmar: HTMLElement = document.getElementById("ventana-popup-confirmar") as HTMLElement;
+
+    if ((this.eliminar && !ventanaPopupEliminar.contains(event.target as Node) && !ventanaPopupConfirmar.contains(event.target as Node)) ||
+      (this.confirmarEdicion && !ventanaPopupConfirmar.contains(event.target as Node))) {
+      this.eliminar = false;
+      this.confirmarEdicion = false;
+      document.body.style.overflowY = 'auto';
+    }
+  }
+
   public volver(): void {
     this.location.back();
   }
@@ -64,6 +77,12 @@ export class PerfilComponent {
   public toggleConfirmarEdicion(): void {
     this.confirmarEdicion = !this.confirmarEdicion;
     this.cursorEncimaCerrar = false;
+
+    if (this.confirmarEdicion) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
   }
 
   public async compararContrasenas() {
@@ -87,9 +106,12 @@ export class PerfilComponent {
 
   public toggleEliminar(): void {
     this.eliminar = !this.eliminar;
+    this.cursorEncimaCerrar = false;
 
-    if (this.cursorEncimaCerrar) {
-      this.cursorEncimaCerrar = false;
+    if (this.eliminar) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
     }
   }
 

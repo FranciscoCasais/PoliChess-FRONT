@@ -29,13 +29,17 @@
   
   <div id="agregar-comentario">
     <img *ngIf="!loginService.isAuthenticated()" [src]="'http://localhost:3000/polichess/imagenes/fotoperfildefault.png'" alt="Foto de perfil predeterminada">
-    <textarea class="input-predeterminado" *ngIf="!loginService.isAuthenticated()" placeholder="Agregá un comentario..." (click)="toggleLogin()" (keydown)="bloquearInput($event)" (dragover)="bloquearInput($event)" (drop)="bloquearInput($event)"></textarea>
+    <textarea #contenidofalso class="input-predeterminado" *ngIf="!loginService.isAuthenticated()" placeholder="Agregá un comentario..." (click)="toggleLogin(contenidofalso)" (keydown)="bloquearInput($event)" (dragover)="bloquearInput($event)" (drop)="bloquearInput($event)"></textarea>
     <img *ngIf="loginService.isAuthenticated()" [src]="'http://localhost:3000'+authService.getUsuario().foto_perfil" alt="Foto de perfil del usuario">
-    <textarea id="contenido" #contenido class="input-predeterminado" *ngIf="loginService.isAuthenticated()" placeholder="Agregá un comentario como {{ authService.getUsuario()!.nombre_usuario }}..." (input)="validarContenido(contenido.value)" [limitLineBreak]="maxLineas"></textarea>
+    <textarea id="contenido" #contenido class="input-predeterminado" *ngIf="loginService.isAuthenticated()" placeholder="Agregá un comentario como @{{ authService.getUsuario()!.nombre_usuario }}..." (input)="validarContenido(contenido.value)" [limitLineBreak]="maxLineas"></textarea>
   </div>
   <div id="contenedor-acciones">
     <button id="boton-comentar" (click)="comentar()" [disabled]="!loginService.isAuthenticated() || contenidoInvalido">Comentar</button>
-    <button id="boton-cancelar" (click)="limpiarContenido()" [disabled]="!loginService.isAuthenticated() || contenidoInvalido">Cancelar</button>
+    <button class="boton-cancelar" (click)="limpiarContenido()" [disabled]="!loginService.isAuthenticated() || contenidoInvalido">Cancelar</button>
   </div>
+  
+  <section id="comentarios">
+    <app-comentario *ngFor="let comentario of comentarios" [comentario]="comentario"></app-comentario>
+  </section>
   
 </div>

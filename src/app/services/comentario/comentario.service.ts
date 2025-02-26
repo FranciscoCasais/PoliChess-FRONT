@@ -38,6 +38,7 @@ export class ComentarioService {
   public editar(comentario: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
 
     const body = comentario;
@@ -47,9 +48,10 @@ export class ComentarioService {
   public eliminar(id: number) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
 
-    return this.http.post(`${this.BASE_URL}/comentarios/${id}`, { headers });
+    return this.http.delete(`${this.BASE_URL}/comentarios/${id}`, { headers });
   }
 
 }

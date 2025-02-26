@@ -1,4 +1,4 @@
-import { Location, NgIf } from '@angular/common';
+import { Location, NgIf, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NoticiaService } from '../../services/noticia/noticia.service';
@@ -8,12 +8,15 @@ import { LoginService } from '../../services/login/login.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { EventoLoginService } from '../../services/evento-login/evento-login.service';
 import { LimitLineBreak } from '../../directives/limit-line-break.directive';
+import { ComentarioComponent } from '../comentario/comentario.component';
 
 @Component({
   selector: 'app-noticia',
   standalone: true,
   imports: [
+    ComentarioComponent,
     NgIf,
+    NgFor,
     LimitLineBreak
   ],
   templateUrl: './noticia.component.html',
@@ -27,6 +30,8 @@ export class NoticiaComponent {
   public totalComentarios: number = 0;
   public maxLineas: number = 15;
   public contenidoInvalido: boolean = true;
+  public comentarios: any[] = [];
+  public paginaActual: number = 1;
 
   constructor(private location: Location, private route: ActivatedRoute, private noticiaService: NoticiaService,
     private usuarioService: UsuarioService, private comentarioService: ComentarioService, public loginService: LoginService,
@@ -59,6 +64,16 @@ export class NoticiaComponent {
             this.totalComentarios = 0;
           }
         });
+
+        this.comentarioService.obtenerAlgunosPorDESC(this.noticia.id, this.paginaActual).subscribe({
+          next: (comentarios: any) => {
+            this.comentarios = comentarios;
+          },
+          error: (error) => {
+            console.error("Error obteniendo comentarios:", error);
+            this.comentarios = [];
+          }
+        });
       },
       error: (error) => {
         console.error("Error obteniendo noticia:", error);
@@ -83,7 +98,8 @@ export class NoticiaComponent {
     this.location.back();
   }
 
-  public toggleLogin(): void {
+  public toggleLogin(input: HTMLTextAreaElement): void {
+    input.blur();
     this.eventoLoginService.emitirEvento("Toggle login");
   }
 
@@ -96,7 +112,7 @@ export class NoticiaComponent {
     this.comentarioService.agregar(comentario).subscribe({
       next: () => {
         alert("Comentario agregado correctamente.");
-        this.volver();
+        window.location.reload();
       },
       error: (err: any) => {
         alert("Ocurrió un error al crear el comentario.");
@@ -114,7 +130,7 @@ export class NoticiaComponent {
   }
 
   public limpiarContenido(): void {
-    const input: HTMLInputElement = document.getElementById("contenido") as HTMLInputElement;
+    const input: HTMLTextAreaElement = document.getElementById("contenido") as HTMLTextAreaElement;
     input.value = "";
     input.blur();
     this.validarContenido(input.value);
