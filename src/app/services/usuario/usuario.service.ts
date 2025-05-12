@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UsuarioService {
+  obtenerUsuariosPorElo(filtroElo: string, paginaActual: number) {
+    throw new Error('Method not implemented.');
+  }
   private BASE_URL: string = 'http://localhost:3000/polichess/usuarios';
 
   constructor(private http: HttpClient) { }
@@ -12,6 +15,7 @@ export class UsuarioService {
   public obtenerUno(id: number) {
     return this.http.get(`${this.BASE_URL}/${id}`);
   }
+  
 
   public obtenerAlgunosPorBusqueda(busqueda: string, pagina: number) {
     return this.http.get(`${this.BASE_URL}/pagina/${pagina}/busqueda/${busqueda}`);
