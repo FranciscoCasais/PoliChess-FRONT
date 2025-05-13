@@ -1,4 +1,9 @@
-<section class="usuarios-lista">
-  <h2>Usuarios registrados</h2>
-  <app-usuario *ngFor="let usuario of usuarios" [usuario]="usuario" />
+<section class="usuarios-lista" [ngClass]="usuarios.length > 0 ? 'cuadricula' : 'mensaje-centrado'">
+  <app-usuario 
+    *ngFor="let usuario of usuarios" 
+    [usuario]="usuario" 
+    [routerLink]="['/usuarios', usuario.id]"
+  />
+  <h3 *ngIf="usuarios.length === 0">No se encontraron usuarios</h3>
 </section>
+  

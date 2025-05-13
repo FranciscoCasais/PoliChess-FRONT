@@ -1,0 +1,13 @@
+<!-- torneo-detalle.component.html -->
+<div class="torneo-detalle">
+  <img [src]="torneo.imagen" alt="Imagen del torneo" class="foto" />
+  <div class="info">
+    <h3>{{ torneo.nombre }}</h3>
+    <p><strong>{{ torneo.tipo }}</strong></p>
+    <p>{{ torneo.descripcion }}</p>
+    <p>Fecha de inicio: {{ torneo.fecha }}</p>
+    <p>Límite de jugadores: {{ torneo.limite_jugadores }}</p>
+    <p>Ubicación: {{ torneo.ubicacion }}</p>
+    <p>Premio: {{ torneo.premio }}</p>
+  </div>
+</div>

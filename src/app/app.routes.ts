@@ -9,6 +9,9 @@ import { AuthGuard } from './guards/auth/auth.guard';
 import { AdminGuard } from './guards/admin/admin.guard';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { UsuarioDetalleComponent } from './components/usuario-detalle/usuario-detalle.component';
+import { TorneosComponent } from './components/torneos/torneos.component';
+import { TorneoDetalleComponent } from './components/torneo-detalle/torneo-detalle.component';
 
 export const routes: Routes = [
   {
@@ -43,17 +46,19 @@ export const routes: Routes = [
     component: CrearNoticiaComponent,
     canActivate: [AuthGuard, AdminGuard]
   },
-  {
-    path: "usuarios",
-    component: UsuariosComponent
-  }, 
-  {
-    path: "usuario",
-    component: UsuarioComponent
-  },
-  {
-  path: 'jugadores/:id',
-  loadComponent: () => import('./components/usuario/usuario.component').then(m => m.UsuarioComponent)
-}
+ {
+  path: 'usuarios',
+  component: UsuariosComponent
+},
+{
+  path: 'usuarios/:id',
+  component: UsuarioDetalleComponent
+},
+{ path: 'torneos', component: TorneosComponent },
+
+  { path: 'torneos/:id', component: TorneoDetalleComponent },
+
+
+  
 
 ];

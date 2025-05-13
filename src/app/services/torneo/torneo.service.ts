@@ -13,9 +13,10 @@ export class TorneoService {
     return this.http.get(`${this.BASE_URL}/${id}`);
   }
 
-  public obtenerAlgunos(pagina: number) {
-    return this.http.get(`${this.BASE_URL}/pagina/${pagina}`);
-  }
+ public obtenerAlgunos(pagina: number) {
+  return this.http.get(`${this.BASE_URL}/pagina/${pagina}`);
+}
+
 
   public obtenerAlgunosPorBusquda(pagina:number, busqueda: string) {
     return this.http.get(`${this.BASE_URL}/pagina/${pagina}/busqueda/${busqueda}`);
@@ -52,4 +53,9 @@ export class TorneoService {
 
     return this.http.delete(`${this.BASE_URL}/${id}`, { headers });
   }
+  // aca
+public obtenerPorId(id: number) {
+  return this.http.get(`${this.BASE_URL}/${id}`);
+}
+
 }

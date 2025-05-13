@@ -43,6 +43,10 @@ export class UsuarioService {
     const body = { usuario };
     return this.http.put(`${this.BASE_URL}`, body, { headers });
   }
+  obtenerPorId(id: string) {
+  return this.http.get(`${this.BASE_URL}/${id}`);
+}
+
 
   public eliminar(id: number) {
     const headers = new HttpHeaders({

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -10,4 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class UsuarioComponent {
   @Input() usuario!: any;
+   constructor(private router: Router) {}
+
+  irADetalle() {
+    this.router.navigate(['/usuarios', this.usuario.id]);
+  }
 }
