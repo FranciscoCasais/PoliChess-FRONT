@@ -1,9 +1,22 @@
+<div id="contenedor-superior">
+  <div class="recuadro-blanco contenedor-busqueda">
+    <label for="buscar-usuario">Buscar usuario: </label>
+    <input
+      id="buscarUsuario"
+      type="text"
+      [(ngModel)]="busqueda"
+      placeholder="Nombre de usuario..."
+      (input)="buscarUsuarios()"
+    />
+    <span *ngIf="busqueda !== ''" (click)="limpiarBusqueda()">&times;</span>
+  </div>
+</div>
+
 <section class="usuarios-lista" [ngClass]="usuarios.length > 0 ? 'cuadricula' : 'mensaje-centrado'">
-  <app-usuario 
-    *ngFor="let usuario of usuarios" 
-    [usuario]="usuario" 
+  <app-usuario
+    *ngFor="let usuario of usuarios"
+    [usuario]="usuario"
     [routerLink]="['/usuarios', usuario.id]"
   />
   <h3 *ngIf="usuarios.length === 0">No se encontraron usuarios</h3>
 </section>
-  

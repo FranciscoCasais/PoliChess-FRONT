@@ -12,6 +12,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { UsuarioDetalleComponent } from './components/usuario-detalle/usuario-detalle.component';
 import { TorneosComponent } from './components/torneos/torneos.component';
 import { TorneoDetalleComponent } from './components/torneo-detalle/torneo-detalle.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,10 @@ export const routes: Routes = [
     path: "creartorneo",
     component: CrearTorneoComponent,
     canActivate: [AuthGuard, AdminGuard]
+  },
+  {path: "calendario",
+    component: CalendarioComponent
+
   },
   {
     path: "crearnoticia",

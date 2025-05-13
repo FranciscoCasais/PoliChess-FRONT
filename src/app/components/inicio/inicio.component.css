@@ -81,3 +81,67 @@ main {
     width: 80%;
   }
 }
+/* ... tus estilos anteriores ... */
+
+.recuadro-blanco {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin: 3rem 5%;
+}
+
+.recuadro-blanco h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.carousel {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 1rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+}
+
+h2 a {
+  text-decoration: none;
+  color: inherit; /* Hereda el color del h2 */
+  transition: color 0.3s ease;
+}
+
+h2 a:hover {
+  color: #444; /* Un color apenas más oscuro en hover */
+}
+
+
+.carousel-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-width: 250px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.carousel-item:hover {
+  transform: translateY(-4px);
+}
+
+.carousel-item h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.carousel-item a {
+  margin-top: 0.5rem;
+  display: inline-block;
+  color: #0066cc;
+  font-weight: bold;
+}
