@@ -14,52 +14,95 @@
     styleUrls: ['./torneos.component.css']
   })
   export class TorneosComponent implements OnInit {
-    torneos: any[] = [];
-    pagina: number = 1; // Página actual para la paginación
-    searchQuery: string = ''; // Parámetro de búsqueda
-    
+  torneos: any[] = [];
+  paginaActual: number = 1;
+  paginas: number = 0;
+  searchQuery: string = '';
 
-    constructor(private torneoService: TorneoService, private router: Router, public loginService: LoginService) {}
-irACrearTorneo(): void {
-  this.router.navigate(['/creartorneo']);
-}
+  constructor(
+    private torneoService: TorneoService,
+    private router: Router,
+    public loginService: LoginService
+  ) {}
 
+  ngOnInit(): void {
+    this.obtenerPaginas();
+    this.cargarTorneos();
+  }
 
-    ngOnInit(): void {
-      this.cargarTorneos();
-    }
-
-    cargarTorneos(): void {
-      this.torneoService.obtenerAlgunos(this.pagina).subscribe({
-        next: (data: any) => {
-          this.torneos = data; // Asignar los datos de torneos a la variable
-          console.log('Torneos cargados:', this.torneos); // Para verificar los datos
-        },
-        error: (err) => {
-          console.error('Error al obtener torneos', err); // Manejo de errores
-        }
+  cargarTorneos(): void {
+    if (this.searchQuery) {
+      this.torneoService.obtenerAlgunosPorBusquda(this.paginaActual, this.searchQuery).subscribe({
+        next: (data: any) => this.torneos = data,
+        error: (err) => console.error('Error al buscar torneos', err)
+      });
+    } else {
+      this.torneoService.obtenerAlgunos(this.paginaActual).subscribe({
+        next: (data: any) => this.torneos = data,
+        error: (err) => console.error('Error al obtener torneos', err)
       });
     }
-limpiarBusqueda(): void {
-  this.searchQuery = '';
-  this.cargarTorneos();
-}
-
-
-    buscarTorneos(): void {
-      if (this.searchQuery) {
-        this.torneoService.obtenerAlgunosPorBusquda(this.pagina, this.searchQuery).subscribe({
-          next: (data: any) => {
-            this.torneos = data;
-          },
-          error: (err) => console.error('Error al buscar torneos', err)
-        });
-      } else {
-        this.cargarTorneos();
-      }
-    }
-
-    verDetalles(id: number): void {
-      this.router.navigate([`/torneos/${id}`]); // Redirige al componente detalle con el ID
-    }
   }
+
+  buscarTorneos(): void {
+    this.paginaActual = 1;
+    this.obtenerPaginas();
+    this.cargarTorneos();
+  }
+
+  limpiarBusqueda(): void {
+    this.searchQuery = '';
+    this.paginaActual = 1;
+    this.obtenerPaginas();
+    this.cargarTorneos();
+  }
+
+  obtenerPaginas(): void {
+    let i = 1;
+    const buscarCantidad = () => {
+      const llamada = this.searchQuery
+        ? this.torneoService.obtenerAlgunosPorBusquda(i, this.searchQuery)
+        : this.torneoService.obtenerAlgunos(i);
+
+      llamada.subscribe({
+        next: (torneos: any) => {
+          if (torneos.length > 0) {
+            i++;
+            buscarCantidad();
+          } else {
+            this.paginas = i - 1;
+          }
+        },
+        error: (err) => {
+          console.error("Error al contar torneos", err);
+          this.paginas = 0;
+        }
+      });
+    };
+    buscarCantidad();
+  }
+
+  paginaAnterior(): void {
+    this.paginaActual--;
+    this.cargarTorneos();
+  }
+
+  paginaSiguiente(): void {
+    this.paginaActual++;
+    this.cargarTorneos();
+  }
+
+  primeraPagina(): void {
+    this.paginaActual = 1;
+    this.cargarTorneos();
+  }
+
+  ultimaPagina(): void {
+    this.paginaActual = this.paginas;
+    this.cargarTorneos();
+  }
+
+  verDetalles(id: number): void {
+    this.router.navigate([`/torneos/${id}`]);
+  }
+}
