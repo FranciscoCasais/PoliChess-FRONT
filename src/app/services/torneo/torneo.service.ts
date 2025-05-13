@@ -57,5 +57,9 @@ export class TorneoService {
 public obtenerPorId(id: number) {
   return this.http.get(`${this.BASE_URL}/${id}`);
 }
+public obtenerProximos() {
+  return this.http.get(`${this.BASE_URL}/proximos`);
+}
+
 
 }
