@@ -29,20 +29,39 @@ export class TorneoDetalleComponent implements OnInit {
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.torneoService.obtenerUno(id).subscribe((data) => {
-      this.torneo = data;
-     
-    });
 
     this.usuarioLogueado = this.loginService.isAuthenticated();
     this.idUsuario = this.loginService.getUsuarioId();
+
+    this.torneoService.obtenerUno(id).subscribe((data) => {
+      this.torneo = data;
+
+      // 🔽 Nuevo fragmento insertado aquí
+      if (this.usuarioLogueado && this.idUsuario && this.torneo?.id) {
+        this.inscripcionService.verificarInscripcion(this.idUsuario, this.torneo.id).subscribe({
+          next: (res) => this.inscrito = res.inscrito,
+          error: (err) => console.error('Error al verificar inscripción:', err)
+        });
+      }
+    });
+  }
+
+  inscribirse() {
+    if (!this.usuarioLogueado || !this.idUsuario || !this.torneo?.id) return;
+
+    this.inscripcionService.agregar({ torneo_id: this.torneo.id }).subscribe({
+      next: () => {
+        this.inscrito = true;
+        alert("Inscripción exitosa.");
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Ocurrió un error al inscribirse.");
+      }
+    });
   }
 
   volver() {
     this.location.back();
   }
-
-
-
-
 }

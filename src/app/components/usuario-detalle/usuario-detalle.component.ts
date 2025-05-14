@@ -28,5 +28,6 @@ export class UsuarioDetalleComponent implements OnInit {
         error: (err) => console.error('Error al obtener usuario', err)
       });
     }
+    
   }
 }

@@ -48,3 +48,17 @@ h2 {
 .boton-volver:hover {
   background-color: #1c5d85;
 }
+.boton-inscribirse {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mensaje-inscripcion {
+  color: green;
+  font-weight: bold;
+}

@@ -39,15 +39,7 @@
         </div>
         <span id="error" *ngIf="fecha?.hasError('fechaInvalida')">La fecha seleccionada está fuera del rango permitido</span>
 
-        <div class="contenedor-en-linea">
-          <label for="minimo-jugadores">Mínimo de jugadores: </label>
-          <input id="minimo-jugadores" name="minimo-jugadores" type="number" min="2" max="20" required style="padding: 7.5px;">
-        </div>
-
-        <div class="contenedor-en-linea">
-          <label for="minimo-elo">Mínimo de Elo:<br>(dejar vacío si no lo hay)</label>
-          <input id="minimo-elo" name="minimo-elo" type="number" min="0" max="3000" required style="padding: 7.5px;">
-        </div>
+    
 
       </div>
 
@@ -73,15 +65,7 @@
           <input id="hora-rondas" name="hora-rondas" type="time" required style="padding: 7.5px;">
         </div>
 
-        <div class="contenedor-en-linea">
-          <label for="maximo-jugadores">Máximo de jugadores:</label>
-          <input id="maximo-jugadores" name="maximo-jugadores" type="number" min="2" max="20" required style="padding: 7.5px;">
-        </div>
-
-        <div class="contenedor-en-linea">
-          <label for="maximo-elo">Máximo de Elo<br>(dejar vacío si no lo hay): </label>
-          <input id="maximo-elo" name="maximo-elo" type="number" min="0" max="3000" required style="padding: 7.5px;">
-        </div>
+        
 
       </div>
     </div>
