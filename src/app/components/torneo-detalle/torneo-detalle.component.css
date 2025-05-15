@@ -47,36 +47,48 @@ h2 {
 
 .boton-volver:hover {
   background-color: #1c5d85;
+}.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
+
+.titulo-torneo {
+  margin: 0;
+  font-size: 2rem;
+  color: #2c3e50;
+  flex-grow: 1;
+}
+
+.contenedor-boton-inscripcion {
+  flex-shrink: 0;
+}
+
 .boton-inscribirse {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.mensaje-inscripcion {
-  color: green;
-  font-weight: bold;
+.boton-inscribirse:hover {
+  background-color: #218838;
 }
+
 .jugadores-inscritos {
-  margin-top: 2rem;
-  padding: 1rem 1.5rem;
+  margin: 4rem auto 2rem auto;
+  padding: 1.5rem 2rem;
   border-radius: 12px;
   background-color: #f8f9fa;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   max-width: 500px;
-}
-
-.jugadores-inscritos h3 {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  color: #333;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 0.5rem;
+  text-align: center;
 }
 
 .jugadores-inscritos ul {
@@ -95,8 +107,19 @@ h2 {
   border-bottom: none;
 }
 
-.jugadores-vacios {
-  margin-top: 2rem;
-  font-style: italic;
-  color: #777;
+.jugador-link {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.jugador-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.mensaje-inscripcion {
+  color: green;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
 }

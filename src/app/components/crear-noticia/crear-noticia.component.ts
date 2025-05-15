@@ -75,7 +75,7 @@ export class CrearNoticiaComponent {
 
     this.noticiaService.agregar(noticia).subscribe({
       next: () => {
-        alert("Noticia creada correctamente.");
+        //alert("Noticia creada correctamente.");
         this.volver();
       },
       error: (err: any) => {
