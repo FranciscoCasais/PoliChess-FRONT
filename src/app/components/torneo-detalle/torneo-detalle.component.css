@@ -62,3 +62,41 @@ h2 {
   color: green;
   font-weight: bold;
 }
+.jugadores-inscritos {
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+}
+
+.jugadores-inscritos h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.jugadores-inscritos ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.jugadores-inscritos li {
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.jugadores-inscritos li:last-child {
+  border-bottom: none;
+}
+
+.jugadores-vacios {
+  margin-top: 2rem;
+  font-style: italic;
+  color: #777;
+}

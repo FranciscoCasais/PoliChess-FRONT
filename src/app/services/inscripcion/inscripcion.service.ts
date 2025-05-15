@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class InscripcionService {
-  private BASE_URL: string = "http://localhost:3000/polichess"; // ✅ Corrección aquí
+  private BASE_URL: string = "http://localhost:3000/polichess"; 
 
   constructor(private http: HttpClient) { }
 
@@ -13,9 +13,20 @@ export class InscripcionService {
     return this.http.get(`${this.BASE_URL}/inscripciones/${id}`);
   }
 
-  public obtenerAlgunos(idTorneo: number, pagina: number) {
-    return this.http.get(`${this.BASE_URL}/torneos/${idTorneo}/inscripciones/pagina/${pagina}`);
-  }
+public obtenerAlgunos(torneoId: number, pagina: number) {
+  console.log(`${this.BASE_URL}/torneos/${torneoId}/inscripciones/pagina/${pagina}`);
+  return this.http.get(`${this.BASE_URL}/torneos/${torneoId}/inscripciones/pagina/${pagina}`);
+}
+
+
+  public obtenerInscritosConNombre(idTorneo: number, pagina: number) {
+  return this.http.get(`${this.BASE_URL}/torneos/${idTorneo}/inscripciones/pagina/${pagina}`);
+}
+public obtenerPorTorneoConUsuarios(idTorneo: number) {
+  return this.http.get(`${this.BASE_URL}/polichess/torneos/${idTorneo}/inscripciones`);
+}
+
+
 
   public agregar(inscripcion: any) {
     const token = localStorage.getItem('token');
@@ -32,21 +43,21 @@ export class InscripcionService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}` // ✅ Se incluye el token
+      'Authorization': `Bearer ${token}`  
     });
 
     const body = inscripcion;
-    return this.http.put(`${this.BASE_URL}/inscripciones`, body, { headers }); // ✅ URL corregida
+    return this.http.put(`${this.BASE_URL}/inscripciones`, body, { headers });
   }
 
   public eliminar(id: number) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}` // ✅ Se incluye el token
+      'Authorization': `Bearer ${token}` 
     });
 
-    return this.http.delete(`${this.BASE_URL}/inscripciones/${id}`, { headers }); // ✅ DELETE corregido
+    return this.http.delete(`${this.BASE_URL}/inscripciones/${id}`, { headers }); 
   }
   public verificarInscripcion(usuarioId: number, torneoId: number) {
   const headers = new HttpHeaders({

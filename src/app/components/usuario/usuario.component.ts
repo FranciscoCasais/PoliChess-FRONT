@@ -13,6 +13,11 @@ export class UsuarioComponent {
   @Input() usuario!: any;
    constructor(private router: Router) {}
 
+   ngOnInit(){
+    console.log(this.usuario.foto_perfil);
+
+   }
+
   irADetalle() {
     this.router.navigate(['/usuarios', this.usuario.id]);
   }

@@ -5,11 +5,12 @@
   <div class="info-grid">
     <div><strong>Ritmo:</strong> {{ torneo.ritmo }}</div>
     <div><strong>Rondas:</strong> {{ torneo.cantidad_rondas }}</div>
-
     <div><strong>Jugadores máximos:</strong> {{ torneo.maximo_jugadores }}</div>
-    <div><strong>Jugadores actuales:</strong> {{ torneo.jugadores_actuales }}</div>
     <div><strong>Fecha de inicio:</strong> {{ torneo.fecha_hora_inicio | date:'long' }}</div>
-   
+    <div><strong>Mínimo de elo:</strong> {{ torneo.minimo_elo }}</div>
+    <div><strong>Máximo de elo:</strong> {{ torneo.maximo_elo }}</div>
+    <div><strong>Jugadores mínimos:</strong> {{ torneo.minimo_jugadores }}</div>
+    <div><strong>Jugadores máximos:</strong> {{ torneo.maximo_jugadores }}</div>
   </div>
 
   <div class="acciones">
@@ -20,11 +21,24 @@
 <div *ngIf="!torneo">
   <p>Cargando torneo...</p>
 </div>
+
 <div *ngIf="usuarioLogueado && !inscrito">
   <button class="boton-inscribirse" (click)="inscribirse()">Inscribirse</button>
 </div>
+
 <div *ngIf="usuarioLogueado && inscrito">
   <p class="mensaje-inscripcion">Ya estás inscrito en este torneo.</p>
 </div>
+<div class="jugadores-inscritos" *ngIf="jugadoresInscritos.length > 0">
+  <h3>Jugadores inscritos</h3>
+  <ul>
+    <li *ngFor="let jugador of jugadoresInscritos">
+      {{ jugador.usuario?.nombre_usuario }}
+    </li>
+  </ul>
+</div>
 
 
+<div *ngIf="jugadoresInscritos.length === 0">
+  <p>Aún no hay jugadores inscritos.</p>
+</div>

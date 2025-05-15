@@ -1,5 +1,5 @@
 <div class="usuario-card" (click)="irADetalle()" style="cursor: pointer;">
-  <img [src]="usuario.foto_perfil" alt="Foto perfil" class="foto" />
+  <img [src]="'http://localhost:3000' + usuario.foto_perfil" alt="Foto perfil" class="foto" />
   <div class="info">
     <h3>{{ usuario.nombre }} {{ usuario.apellido }}</h3>
     <p><strong>{{ '@' + usuario.nombre_usuario }}</strong></p>
